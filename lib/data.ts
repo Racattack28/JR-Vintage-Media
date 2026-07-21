@@ -167,9 +167,26 @@ export interface ReviewEntry {
 }
 
 export const reviewData: ReviewEntry[] = [
-  { name: "Customer name", text: "Add a customer review here." },
-  { name: "Customer name", text: "Add a customer review here." },
-  { name: "Customer name", text: "Add a customer review here." },
+  {
+    name: "Flora",
+    text: "I found an old box of family VHS tapes and wasn't sure what to expect. The transfers came back looking great and everything was organised nicely. It was an easy process from start to finish.",
+  },
+  {
+    name: "Meg",
+    text: "Really impressed with the quality of the digitised videos. Communication was clear, the turnaround was quick, and it was great seeing these memories again after so many years.",
+  },
+  {
+    name: "Justin",
+    text: "Fantastic service. My tapes were handled with care and the digital files were easy to access. It means a lot to have these family moments preserved.",
+  },
+  {
+    name: "Sarah",
+    text: "I had several old VHS tapes converted and the whole experience was smooth. Everything was completed on time and the results were exactly what I was hoping for. I would happily use this service again.",
+  },
+  {
+    name: "Elsie",
+    text: "Professional, reliable, and straightforward. The videos turned out better than I expected and it was wonderful being able to share them with my family. Highly recommended.",
+  },
 ];
 
 export const disclaimerText =

@@ -4,18 +4,22 @@ import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
 import { reviewData } from "@/lib/data";
 
+const VISIBLE_CARDS = 3;
+
 export default function Reviews() {
   const [index, setIndex] = useState(0);
   const count = reviewData.length;
+  const maxIndex = Math.max(0, count - VISIBLE_CARDS);
+  const stops = maxIndex + 1;
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % count);
+      setIndex((i) => (i + 1) % stops);
     }, 5000);
     return () => clearInterval(timer);
-  }, [count]);
+  }, [stops]);
 
-  const offset = `-${index * (100 / count)}%`;
+  const offset = `-${index * (100 / VISIBLE_CARDS)}%`;
 
   return (
     <Reveal
@@ -56,18 +60,18 @@ export default function Reviews() {
         </div>
         <div className="flex items-center justify-center gap-5 mt-6">
           <button
-            onClick={() => setIndex((i) => (i - 1 + count) % count)}
+            onClick={() => setIndex((i) => (i - 1 + stops) % stops)}
             aria-label="Previous review"
             className="jr-btn w-[38px] h-[38px] rounded-full border-[1.5px] border-[#2b2016] bg-transparent text-[16px] cursor-pointer"
           >
             &larr;
           </button>
           <div className="flex gap-2">
-            {reviewData.map((_, i) => (
+            {Array.from({ length: stops }, (_, i) => (
               <button
                 key={i}
                 onClick={() => setIndex(i)}
-                aria-label={`Go to review ${i + 1}`}
+                aria-label={`Go to slide ${i + 1}`}
                 className="w-2 h-2 rounded-full cursor-pointer p-0 border-0"
                 style={{
                   background: i === index ? "#bf4e2a" : "rgba(43,32,22,0.2)",
@@ -76,7 +80,7 @@ export default function Reviews() {
             ))}
           </div>
           <button
-            onClick={() => setIndex((i) => (i + 1) % count)}
+            onClick={() => setIndex((i) => (i + 1) % stops)}
             aria-label="Next review"
             className="jr-btn w-[38px] h-[38px] rounded-full border-[1.5px] border-[#2b2016] bg-transparent text-[16px] cursor-pointer"
           >
