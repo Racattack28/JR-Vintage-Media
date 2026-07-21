@@ -49,7 +49,7 @@ export default function Hero() {
           />
         </div>
         <div className="jr-hero-overlay">
-          <div className="grid grid-cols-4 gap-5 p-8">
+          <div className="grid grid-cols-5 gap-5 p-8">
             {formatNavItems.map((item) => (
               <Link
                 key={item.slug}

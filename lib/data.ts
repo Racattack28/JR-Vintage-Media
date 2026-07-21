@@ -1,10 +1,7 @@
 export type FormatSlug =
   | "vhs"
   | "vhs-c"
-  | "s-vhs"
-  | "video8"
-  | "hi8"
-  | "digital8"
+  | "hi8-video8"
   | "minidv"
   | "other";
 
@@ -21,7 +18,7 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     title: "VHS",
     placeholder: "Photo of a VHS tape",
     description:
-      "VHS was the standard videotape format in most home camcorders and VCRs from the late 1970s through the 2000s, storing video on a reel of magnetic tape inside a plastic cassette. That tape degrades a little more every time it's played and simply from sitting in storage, which is why converting to digital now preserves what's left of the picture and sound before further loss.",
+      "VHS was the standard videotape format in most home camcorders and VCRs from the late 1970s through the 2000s, storing video on a reel of magnetic tape inside a plastic cassette. This includes S-VHS (Super VHS), a higher-resolution version used by more serious home videographers from the late 1980s onward, which I convert the same way. The tape degrades a little more every time it's played and simply from sitting in storage, which is why converting to digital now preserves what's left of the picture and sound before further loss.",
   },
   "vhs-c": {
     slug: "vhs-c",
@@ -30,33 +27,12 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     description:
       "VHS-C is the compact version of VHS, made for smaller camcorders and playable in a standard VCR with an adapter. It uses the same magnetic tape and is prone to the same age-related picture loss, so the transfer process is the same careful frame-by-frame capture as full-size VHS.",
   },
-  "s-vhs": {
-    slug: "s-vhs",
-    title: "S-VHS",
-    placeholder: "Photo of an S-VHS tape",
+  "hi8-video8": {
+    slug: "hi8-video8",
+    title: "Hi8 & Video8",
+    placeholder: "Photo of a Hi8 or Video8 tape",
     description:
-      "S-VHS (Super VHS) is a higher-resolution version of standard VHS, mostly used by more serious home videographers from the late 1980s onward. It holds noticeably sharper video than regular VHS, and that extra detail is exactly what a careful digital transfer is worth preserving.",
-  },
-  video8: {
-    slug: "video8",
-    title: "Video8",
-    placeholder: "Photo of a Video8 tape",
-    description:
-      "Video8 was Sony's compact camcorder tape format from the 1980s and 90s, popular for its small cassette size. Like VHS, the tape's magnetic coating degrades over time, and playback decks for this format are increasingly hard to find in good condition, which makes transferring sooner rather than later worthwhile.",
-  },
-  hi8: {
-    slug: "hi8",
-    title: "Hi8",
-    placeholder: "Photo of a Hi8 tape",
-    description:
-      "Hi8 is an improved, higher-resolution version of Video8, common in camcorders through the 1990s. It captures a sharper image than standard Video8, and preserving that extra quality is part of what makes a proper transfer worthwhile before the tape or the compatible decks become harder to find.",
-  },
-  digital8: {
-    slug: "digital8",
-    title: "Digital8",
-    placeholder: "Photo of a Digital8 tape",
-    description:
-      "Digital8 recorded a digital signal onto the same style of tape as Video8 and Hi8, giving cleaner picture quality with less generational loss. The tapes themselves can still deteriorate physically over time, so getting the footage off the original cassette and onto a stable digital file is still worth doing.",
+      "Hi8 and Video8 were Sony's compact camcorder tape formats from the 1980s and 90s, with Hi8 offering a sharper, higher-resolution image than standard Video8. This also covers Digital8, which recorded a digital signal onto the same style of tape for cleaner picture quality with less generational loss. All three share the same small cassette shell, and playback decks for them are increasingly hard to find in good condition, which makes transferring sooner rather than later worthwhile.",
   },
   minidv: {
     slug: "minidv",
@@ -79,10 +55,7 @@ export const formatSlugs = Object.keys(formatData) as FormatSlug[];
 export const formatNavItems: { slug: FormatSlug; label: string }[] = [
   { slug: "vhs", label: "VHS" },
   { slug: "vhs-c", label: "VHS-C" },
-  { slug: "s-vhs", label: "S-VHS" },
-  { slug: "video8", label: "Video8" },
-  { slug: "hi8", label: "Hi8" },
-  { slug: "digital8", label: "Digital8" },
+  { slug: "hi8-video8", label: "Hi8 & Video8" },
   { slug: "minidv", label: "MiniDV" },
   { slug: "other", label: "Other" },
 ];
@@ -108,7 +81,7 @@ export const faqData: FaqEntry[] = [
   {
     cat: "Tapes & formats",
     q: "What types of tapes can you convert?",
-    a: "VHS makes up most of what comes through the door, but the other common home video formats are covered too, including VHS-C, S-VHS, Video8, Hi8, Digital8 and MiniDV. If your tape isn't listed here, get in touch with a photo of it and I'll let you know whether it's something I can handle.",
+    a: "VHS makes up most of what comes through the door, but the other common home video formats are covered too, including S-VHS, VHS-C, Hi8, Video8, Digital8 and MiniDV. If your tape isn't listed here, get in touch with a photo of it and I'll let you know whether it's something I can handle.",
   },
   {
     cat: "Tapes & formats",
