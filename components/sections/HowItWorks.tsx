@@ -28,7 +28,7 @@ export default function HowItWorks() {
         HOW IT WORKS
       </div>
       <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-14 max-w-[600px]">
-        Three steps between the attic box and the family group chat.
+        Three easy steps to bring your old memories back to life.
       </h2>
       <div className="jr-grid-3 grid grid-cols-1 lg:grid-cols-3 gap-10">
         {steps.map((step) => (
