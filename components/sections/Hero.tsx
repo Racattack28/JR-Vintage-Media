@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import PlaceholderImage from "@/components/PlaceholderImage";
 import { formatNavItems } from "@/lib/data";
 
 export default function Hero() {
@@ -36,11 +36,16 @@ export default function Hero() {
       </div>
       <div className="jr-hero-frame relative">
         <div className="absolute -inset-[18px] border-[1.5px] border-dashed border-[rgba(43,32,22,0.25)] rounded-[22px] pointer-events-none" />
-        <PlaceholderImage
-          alt="Drop a photo of tapes / camcorder / transfer setup"
-          heightClass="h-[440px]"
-          shadow
-        />
+        <div className="relative w-full h-[440px] rounded-[18px] overflow-hidden shadow-[0_24px_50px_-20px_rgba(43,32,22,0.35)]">
+          <Image
+            src="/hero-tapes.png"
+            alt="Stacks of VHS tapes and DVDs beside a CRT TV and VCR"
+            fill
+            sizes="(min-width: 1240px) 1144px, 100vw"
+            className="object-cover"
+            priority
+          />
+        </div>
         <div className="jr-hero-overlay">
           <div className="grid grid-cols-4 gap-5 p-8">
             {formatNavItems.map((item) => (

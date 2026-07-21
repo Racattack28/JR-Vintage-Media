@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scratch folder for raw source photos before they're placed in public/
+/photos-inbox/

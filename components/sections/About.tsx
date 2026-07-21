@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import PlaceholderImage from "@/components/PlaceholderImage";
 
 export default function About() {
   return (
@@ -8,10 +8,15 @@ export default function About() {
       className="block bg-[#ece1cb] py-[100px] px-6 md:px-12 scroll-mt-[60px]"
     >
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-14 items-center">
-        <PlaceholderImage
-          alt="Drop a photo of Jack at the transfer desk"
-          heightClass="h-[340px]"
-        />
+        <div className="relative w-full h-[340px] rounded-[18px] overflow-hidden">
+          <Image
+            src="/about-jack.jpg"
+            alt="Jack Racovalis smiling, holding a pool cue at a bar"
+            fill
+            sizes="(min-width: 1024px) 435px, 100vw"
+            className="object-cover"
+          />
+        </div>
         <div>
           <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
             WHO&apos;S BEHIND THIS
