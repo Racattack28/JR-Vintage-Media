@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PlaceholderImage from "@/components/PlaceholderImage";
 import { formatData, formatSlugs, type FormatSlug } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -40,12 +40,15 @@ export default async function FormatPage({
     <div className="min-h-screen bg-[#f5efe2] font-[family-name:var(--font-lato)] text-[#2b2016]">
       <Header variant="format" />
       <div className="max-w-[1000px] mx-auto px-6 md:px-12 pt-16 pb-24">
-        <PlaceholderImage
-          alt={entry.placeholder}
-          heightClass="h-[380px]"
-          shadow
-          className="mb-9"
-        />
+        <div className="relative w-full h-[380px] rounded-[18px] overflow-hidden shadow-[0_24px_50px_-20px_rgba(43,32,22,0.35)] mb-9">
+          <Image
+            src={entry.image}
+            alt={entry.placeholder}
+            fill
+            sizes="(min-width: 1000px) 904px, 100vw"
+            className="object-cover"
+          />
+        </div>
         <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
           TAPE FORMAT
         </div>

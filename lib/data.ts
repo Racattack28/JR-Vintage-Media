@@ -9,6 +9,7 @@ export interface FormatEntry {
   slug: FormatSlug;
   title: string;
   placeholder: string;
+  image: string;
   description: string;
 }
 
@@ -17,6 +18,7 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     slug: "vhs",
     title: "VHS",
     placeholder: "Photo of a VHS tape",
+    image: "/formats/vhs.png",
     description:
       "VHS was the standard videotape format in most home camcorders and VCRs from the late 1970s through the 2000s, storing video on a reel of magnetic tape inside a plastic cassette. This includes S-VHS (Super VHS), a higher-resolution version used by more serious home videographers from the late 1980s onward, which I convert the same way. The tape degrades a little more every time it's played and simply from sitting in storage, which is why converting to digital now preserves what's left of the picture and sound before further loss.",
   },
@@ -24,13 +26,15 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     slug: "vhs-c",
     title: "VHS-C",
     placeholder: "Photo of a VHS-C tape",
+    image: "/formats/vhs-c.png",
     description:
       "VHS-C is the compact version of VHS, made for smaller camcorders and playable in a standard VCR with an adapter. It uses the same magnetic tape and is prone to the same age-related picture loss, so the transfer process is the same careful frame-by-frame capture as full-size VHS.",
   },
   "hi8-video8": {
     slug: "hi8-video8",
     title: "Hi8 & Video8",
-    placeholder: "Photo of a Hi8 or Video8 tape",
+    placeholder: "Photo of a Hi8 tape",
+    image: "/formats/hi8-video8.png",
     description:
       "Hi8 and Video8 were Sony's compact camcorder tape formats from the 1980s and 90s, with Hi8 offering a sharper, higher-resolution image than standard Video8. This also covers Digital8, which recorded a digital signal onto the same style of tape for cleaner picture quality with less generational loss. All three share the same small cassette shell, and playback decks for them are increasingly hard to find in good condition, which makes transferring sooner rather than later worthwhile.",
   },
@@ -38,13 +42,15 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     slug: "minidv",
     title: "MiniDV",
     placeholder: "Photo of a MiniDV tape",
+    image: "/formats/minidv.png",
     description:
       "MiniDV was the dominant digital camcorder tape format through the 2000s, known for sharp, stable picture quality. While the digital recording holds up well, the tapes and the decks that play them are aging, so transferring now protects the footage against a mechanical failure down the line.",
   },
   other: {
     slug: "other",
     title: "Something else",
-    placeholder: "Photo of your tape or device",
+    placeholder: "Photo of assorted cassette tapes",
+    image: "/formats/other.png",
     description:
       "Got a format that's not listed here? Camcorder and video technology varied a lot over the decades, and there are more variants out there than most people expect. Get in touch with a photo of what you have and I'll let you know whether it's something I can convert.",
   },
