@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { formatNavItems } from "@/lib/data";
+import { formatNavItems, partnerNavItems } from "@/lib/data";
 
 const linkClass =
   "block py-3 text-[15px] font-medium text-[#2b2016] no-underline border-b border-[rgba(43,32,22,0.1)]";
@@ -10,11 +10,13 @@ const linkClass =
 export default function MobileNav({ prefixHome }: { prefixHome: boolean }) {
   const [open, setOpen] = useState(false);
   const [formatsOpen, setFormatsOpen] = useState(false);
+  const [partnerOpen, setPartnerOpen] = useState(false);
   const base = prefixHome ? "/" : "";
 
   function close() {
     setOpen(false);
     setFormatsOpen(false);
+    setPartnerOpen(false);
   }
 
   return (
@@ -70,6 +72,31 @@ export default function MobileNav({ prefixHome }: { prefixHome: boolean }) {
                 <Link
                   key={item.slug}
                   href={`/formats/${item.slug}`}
+                  className="block py-2 text-[14px] text-[rgba(43,32,22,0.75)] no-underline"
+                  onClick={close}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setPartnerOpen((v) => !v)}
+            className={`${linkClass} w-full flex items-center justify-between bg-transparent cursor-pointer text-left`}
+          >
+            Partner with me
+            <span className="font-[family-name:var(--font-barlow)] text-[18px] text-[#bf4e2a]">
+              {partnerOpen ? "−" : "+"}
+            </span>
+          </button>
+          {partnerOpen && (
+            <div className="pl-4 pb-2">
+              {partnerNavItems.map((item) => (
+                <Link
+                  key={item.label}
+                  href="/partner"
                   className="block py-2 text-[14px] text-[rgba(43,32,22,0.75)] no-underline"
                   onClick={close}
                 >

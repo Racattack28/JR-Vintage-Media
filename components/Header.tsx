@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import MobileNav from "@/components/MobileNav";
-import { formatNavItems } from "@/lib/data";
+import { formatNavItems, partnerNavItems } from "@/lib/data";
 
 type HeaderVariant = "site" | "format" | "order";
 
@@ -31,6 +31,18 @@ function NavLinks({ prefixHome }: { prefixHome: boolean }) {
           </div>
         </div>
       </div>
+      <div className="jr-dropdown relative">
+        <div className={`${navLinkClass} cursor-default`}>Partner with me</div>
+        <div className="jr-dropdown-menu">
+          <div className="jr-dropdown-menu-inner">
+            {partnerNavItems.map((item) => (
+              <Link key={item.label} href="/partner" className="jr-dropdown-item">
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
       <Link href={`${base}#pricing`} className={navLinkClass}>
         Pricing
       </Link>
@@ -49,19 +61,16 @@ function NavLinks({ prefixHome }: { prefixHome: boolean }) {
 
 export default function Header({ variant }: { variant: HeaderVariant }) {
   return (
-    <div className="sticky top-0 z-50 relative flex items-center justify-between py-[18px] px-6 md:px-12 bg-[rgba(245,239,226,0.92)] backdrop-blur-[6px] border-b border-[rgba(43,32,22,0.14)]">
-      <Link href="/" className="flex items-center gap-2 sm:gap-3 min-w-0">
+    <div className="sticky top-0 z-50 relative flex items-center justify-between py-2 px-6 md:px-12 bg-[rgba(245,239,226,0.92)] backdrop-blur-[6px] border-b border-[rgba(43,32,22,0.14)]">
+      <Link href="/" className="flex items-center min-w-0">
         <Image
           src="/logo.png"
           alt="JR Vintage Media"
-          width={64}
-          height={64}
-          className="h-11 w-11 sm:h-16 sm:w-16 rounded-[10px] object-cover shrink-0"
+          width={300}
+          height={300}
+          className="h-20 w-20 sm:h-36 sm:w-36 rounded-[18px] object-cover shrink-0"
           priority
         />
-        <div className="font-[family-name:var(--font-bitter)] text-[16px] sm:text-[22px] tracking-[0.5px] whitespace-nowrap">
-          JR Vintage Media
-        </div>
       </Link>
 
       {variant === "order" ? (
