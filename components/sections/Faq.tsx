@@ -20,7 +20,7 @@ export default function Faq() {
   return (
     <Reveal
       id="faq"
-      className="block max-w-[900px] mx-auto px-6 md:px-12 py-[60px] scroll-mt-[60px]"
+      className="block max-w-[900px] mx-auto px-6 md:px-12 py-[46px] scroll-mt-[60px]"
     >
       <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
         FAQ

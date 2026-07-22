@@ -5,7 +5,7 @@ export default function About() {
   return (
     <Reveal
       id="about"
-      className="block bg-[#ece1cb] py-[100px] px-6 md:px-12 scroll-mt-[60px]"
+      className="block bg-[#ece1cb] py-[76px] px-6 md:px-12 scroll-mt-[60px]"
     >
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-14 items-center">
         <div className="relative w-full h-[340px] rounded-[18px] overflow-hidden">

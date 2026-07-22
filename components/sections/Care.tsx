@@ -2,7 +2,7 @@ import Reveal from "@/components/Reveal";
 
 export default function Care() {
   return (
-    <Reveal className="block bg-[#ece1cb] py-[90px] px-6 md:px-12">
+    <Reveal className="block bg-[#ece1cb] py-[70px] px-6 md:px-12">
       <div className="max-w-[820px] mx-auto text-center">
         <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[1.5px] text-[#9c3d1f] mb-[14px]">
           HOW{" "}

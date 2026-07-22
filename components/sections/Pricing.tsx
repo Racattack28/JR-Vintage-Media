@@ -11,13 +11,13 @@ export default function Pricing() {
   return (
     <Reveal
       id="pricing"
-      className="block bg-[#2b2016] text-[#f5efe2] py-[110px] px-6 md:px-12 scroll-mt-[60px]"
+      className="block bg-[#2b2016] text-[#f5efe2] py-[84px] px-6 md:px-12 scroll-mt-[60px]"
     >
       <div className="max-w-[1240px] mx-auto">
         <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#d9a15a] mb-[14px]">
           PRICING
         </div>
-        <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-14 max-w-[600px] text-[#f5efe2]">
+        <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-11 max-w-[600px] text-[#f5efe2]">
           Simple, per-tape pricing. The more you send, the less each one
           costs.
         </h2>

@@ -4,7 +4,7 @@ import { formatNavItems } from "@/lib/data";
 
 export default function Hero() {
   return (
-    <div className="flex flex-col gap-10 max-w-[1240px] mx-auto px-6 md:px-12 pt-[88px] pb-24">
+    <div className="flex flex-col gap-8 max-w-[1240px] mx-auto px-6 md:px-12 pt-12 pb-20">
       <div style={{ animation: "jr-fade-up 0.7s ease both" }}>
         <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[18px]">
           TAPES IN. MEMORIES BACK.

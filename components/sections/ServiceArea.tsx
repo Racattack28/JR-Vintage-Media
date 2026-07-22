@@ -4,12 +4,12 @@ export default function ServiceArea() {
   return (
     <Reveal
       id="service"
-      className="block max-w-[1240px] mx-auto px-6 md:px-12 py-[110px] scroll-mt-[60px]"
+      className="block max-w-[1240px] mx-auto px-6 md:px-12 py-[84px] scroll-mt-[60px]"
     >
       <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
         LOCAL &amp; MAIL-IN
       </div>
-      <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-14 max-w-[600px]">
+      <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-11 max-w-[600px]">
         Wherever your tapes are, there&apos;s a way to get them to me.
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
