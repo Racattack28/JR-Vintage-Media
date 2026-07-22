@@ -8,6 +8,27 @@ type HeaderVariant = "site" | "format" | "order";
 const navLinkClass =
   "jr-nav-link text-[#2b2016] no-underline text-[14px] font-medium";
 
+function ChevronDown() {
+  return (
+    <svg
+      width="10"
+      height="6"
+      viewBox="0 0 10 6"
+      fill="none"
+      aria-hidden="true"
+      className="jr-chevron shrink-0 relative top-[1px]"
+    >
+      <path
+        d="M1 5L5 1L9 5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function NavLinks({ prefixHome }: { prefixHome: boolean }) {
   const base = prefixHome ? "/" : "";
   return (
@@ -16,7 +37,10 @@ function NavLinks({ prefixHome }: { prefixHome: boolean }) {
         How it works
       </Link>
       <div className="jr-dropdown relative">
-        <div className={`${navLinkClass} cursor-default`}>What I convert</div>
+        <div className={`${navLinkClass} cursor-default flex items-center gap-[5px]`}>
+          What I convert
+          <ChevronDown />
+        </div>
         <div className="jr-dropdown-menu">
           <div className="jr-dropdown-menu-inner">
             {formatNavItems.map((item) => (
@@ -32,7 +56,10 @@ function NavLinks({ prefixHome }: { prefixHome: boolean }) {
         </div>
       </div>
       <div className="jr-dropdown relative">
-        <div className={`${navLinkClass} cursor-default`}>Partner with me</div>
+        <div className={`${navLinkClass} cursor-default flex items-center gap-[5px]`}>
+          Partner with me
+          <ChevronDown />
+        </div>
         <div className="jr-dropdown-menu">
           <div className="jr-dropdown-menu-inner">
             {partnerNavItems.map((item) => (
