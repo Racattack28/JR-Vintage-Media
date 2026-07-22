@@ -50,16 +50,16 @@ function NavLinks({ prefixHome }: { prefixHome: boolean }) {
 export default function Header({ variant }: { variant: HeaderVariant }) {
   return (
     <div className="sticky top-0 z-50 relative flex items-center justify-between py-[18px] px-6 md:px-12 bg-[rgba(245,239,226,0.92)] backdrop-blur-[6px] border-b border-[rgba(43,32,22,0.14)]">
-      <Link href="/" className="flex items-center gap-3">
+      <Link href="/" className="flex items-center gap-2 sm:gap-3 min-w-0">
         <Image
           src="/logo.png"
           alt="JR Vintage Media"
           width={64}
           height={64}
-          className="h-16 w-16 rounded-[10px] object-cover"
+          className="h-11 w-11 sm:h-16 sm:w-16 rounded-[10px] object-cover shrink-0"
           priority
         />
-        <div className="font-[family-name:var(--font-bitter)] text-[22px] tracking-[0.5px]">
+        <div className="font-[family-name:var(--font-bitter)] text-[16px] sm:text-[22px] tracking-[0.5px] whitespace-nowrap">
           JR Vintage Media
         </div>
       </Link>
@@ -67,7 +67,7 @@ export default function Header({ variant }: { variant: HeaderVariant }) {
       {variant === "order" ? (
         <Link
           href="/"
-          className="font-[family-name:var(--font-lato)] font-semibold text-[14px] bg-transparent border border-[#2b2016] text-[#2b2016] py-[9px] px-[18px] rounded-[30px]"
+          className="shrink-0 whitespace-nowrap font-[family-name:var(--font-lato)] font-semibold text-[13px] sm:text-[14px] bg-transparent border border-[#2b2016] text-[#2b2016] py-[8px] px-[14px] sm:py-[9px] sm:px-[18px] rounded-[30px]"
         >
           Back to site
         </Link>
