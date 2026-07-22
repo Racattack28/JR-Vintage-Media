@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import MobileNav from "@/components/MobileNav";
 import { formatNavItems } from "@/lib/data";
 
 type HeaderVariant = "site" | "format" | "order";
@@ -48,7 +49,7 @@ function NavLinks({ prefixHome }: { prefixHome: boolean }) {
 
 export default function Header({ variant }: { variant: HeaderVariant }) {
   return (
-    <div className="sticky top-0 z-50 flex items-center justify-between py-[18px] px-6 md:px-12 bg-[rgba(245,239,226,0.92)] backdrop-blur-[6px] border-b border-[rgba(43,32,22,0.14)]">
+    <div className="sticky top-0 z-50 relative flex items-center justify-between py-[18px] px-6 md:px-12 bg-[rgba(245,239,226,0.92)] backdrop-blur-[6px] border-b border-[rgba(43,32,22,0.14)]">
       <Link href="/" className="flex items-center gap-3">
         <Image
           src="/logo.png"
@@ -71,15 +72,18 @@ export default function Header({ variant }: { variant: HeaderVariant }) {
           Back to site
         </Link>
       ) : (
-        <div className="hidden min-[1150px]:flex items-center gap-[22px]">
-          <NavLinks prefixHome={variant === "format"} />
-          <Link
-            href="/quote"
-            className="jr-btn font-[family-name:var(--font-lato)] font-semibold text-[14px] bg-[#bf4e2a] hover:bg-[#9c3d1f] text-[#fffaf0] py-[11px] px-[22px] rounded-[30px]"
-          >
-            Get a free quote
-          </Link>
-        </div>
+        <>
+          <div className="hidden min-[1150px]:flex items-center gap-[22px]">
+            <NavLinks prefixHome={variant === "format"} />
+            <Link
+              href="/quote"
+              className="jr-btn font-[family-name:var(--font-lato)] font-semibold text-[14px] bg-[#bf4e2a] hover:bg-[#9c3d1f] text-[#fffaf0] py-[11px] px-[22px] rounded-[30px]"
+            >
+              Get a free quote
+            </Link>
+          </div>
+          <MobileNav prefixHome={variant === "format"} />
+        </>
       )}
     </div>
   );

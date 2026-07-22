@@ -4,13 +4,20 @@ import { useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
 import { reviewData } from "@/lib/data";
 
-const VISIBLE_CARDS = 3;
-
 export default function Reviews() {
   const [index, setIndex] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(3);
   const count = reviewData.length;
-  const maxIndex = Math.max(0, count - VISIBLE_CARDS);
+  const maxIndex = Math.max(0, count - visibleCards);
   const stops = maxIndex + 1;
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setVisibleCards(mq.matches ? 1 : 3);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -19,7 +26,10 @@ export default function Reviews() {
     return () => clearInterval(timer);
   }, [stops]);
 
-  const offset = `-${index * (100 / VISIBLE_CARDS)}%`;
+  // Clamp for rendering rather than syncing back into state, since
+  // stops can shrink when the viewport crosses the mobile breakpoint.
+  const clampedIndex = Math.min(index, maxIndex);
+  const offset = `-${clampedIndex * (100 / visibleCards)}%`;
 
   return (
     <Reveal
@@ -41,7 +51,8 @@ export default function Reviews() {
             {reviewData.map((review, i) => (
               <div
                 key={i}
-                className="shrink-0 grow-0 basis-1/3 px-3 box-border"
+                className="shrink-0 grow-0 px-3 box-border"
+                style={{ flexBasis: `${100 / visibleCards}%` }}
               >
                 <div className="border border-[rgba(43,32,22,0.16)] rounded-2xl p-7 bg-[#fffaf0] h-full">
                   <div className="font-[family-name:var(--font-barlow)] text-[15px] text-[#bf4e2a] mb-[14px]">
@@ -74,7 +85,8 @@ export default function Reviews() {
                 aria-label={`Go to slide ${i + 1}`}
                 className="w-2 h-2 rounded-full cursor-pointer p-0 border-0"
                 style={{
-                  background: i === index ? "#bf4e2a" : "rgba(43,32,22,0.2)",
+                  background:
+                    i === clampedIndex ? "#bf4e2a" : "rgba(43,32,22,0.2)",
                 }}
               />
             ))}
