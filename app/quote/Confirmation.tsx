@@ -31,8 +31,8 @@ export default function Confirmation({
         Thanks, {name}. Got it.
       </h2>
       <p className="text-[15px] leading-[1.7] text-[rgba(43,32,22,0.7)] max-w-[460px] mx-auto mb-9">
-        {confirmationText} You&apos;ll hear from Jack at {email} within one
-        business day to confirm details.
+        {confirmationText} You&apos;ll hear from Jack at {email} shortly to
+        confirm details.
       </p>
       <div className="inline-block text-left border border-[rgba(43,32,22,0.16)] rounded-[14px] py-6 px-7 bg-[#fffaf0] mb-9">
         <div className="text-[13px] text-[rgba(43,32,22,0.55)] mb-1">
