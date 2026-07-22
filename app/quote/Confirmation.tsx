@@ -36,7 +36,7 @@ export default function Confirmation({
       </p>
       <div className="inline-block text-left border border-[rgba(43,32,22,0.16)] rounded-[14px] py-6 px-7 bg-[#fffaf0] mb-9">
         <div className="text-[13px] text-[rgba(43,32,22,0.55)] mb-1">
-          Estimated total
+          Estimated total &ndash; nothing to pay today
         </div>
         <div className="font-[family-name:var(--font-barlow)] text-[24px]">
           ${grandTotal}
