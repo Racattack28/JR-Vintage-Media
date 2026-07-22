@@ -61,14 +61,14 @@ function NavLinks({ prefixHome }: { prefixHome: boolean }) {
 
 export default function Header({ variant }: { variant: HeaderVariant }) {
   return (
-    <div className="sticky top-0 z-50 relative flex items-center justify-between py-2 px-6 md:px-12 bg-[rgba(245,239,226,0.92)] backdrop-blur-[6px] border-b border-[rgba(43,32,22,0.14)]">
+    <div className="sticky top-0 z-50 relative flex items-center justify-between py-3 px-6 md:px-12 bg-[rgba(245,239,226,0.92)] backdrop-blur-[6px] border-b border-[rgba(43,32,22,0.14)]">
       <Link href="/" className="flex items-center min-w-0">
         <Image
           src="/logo.png"
           alt="JR Vintage Media"
-          width={300}
-          height={300}
-          className="h-20 w-20 sm:h-36 sm:w-36 rounded-[18px] object-cover shrink-0"
+          width={606}
+          height={312}
+          className="h-14 w-auto sm:h-20 sm:w-auto rounded-[8px] shrink-0"
           priority
         />
       </Link>
