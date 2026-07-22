@@ -10,9 +10,9 @@ export default function Hero() {
           TAPES IN. MEMORIES BACK.
         </div>
         <h1 className="font-[family-name:var(--font-merriweather)] italic font-black text-[clamp(30px,4.5vw,54px)] leading-[1.35] m-0 mb-6">
-          Some memories aren&apos;t lost.{" "}
+          Some memories aren&apos;t lost,{" "}
           <em className="text-[#bf4e2a]">
-            They&apos;re simply waiting to be played again.
+            they&apos;re simply waiting to be played again.
           </em>
         </h1>
         <p className="jr-hero-copy text-[17px] leading-[1.7] text-[rgba(43,32,22,0.75)] max-w-[480px] m-0 mb-[34px]">

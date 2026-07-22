@@ -193,7 +193,7 @@ export default function QuoteFlow() {
               disabled={submitting}
               className="font-[family-name:var(--font-lato)] font-bold text-[15px] bg-[#bf4e2a] text-[#fffaf0] border-none py-[14px] px-[30px] rounded-[30px] cursor-pointer disabled:opacity-60"
             >
-              {submitting ? "Submitting…" : "Submit order"}
+              {submitting ? "Submitting…" : "Submit request"}
             </button>
           ) : (
             <button
