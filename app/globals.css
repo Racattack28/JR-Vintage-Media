@@ -114,7 +114,7 @@ select:focus {
 }
 
 .jr-marquee-track {
-  animation: jr-marquee 26s linear infinite;
+  animation: jr-marquee 130s linear infinite;
 }
 
 .jr-marquee-track:hover {
