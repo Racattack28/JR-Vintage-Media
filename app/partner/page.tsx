@@ -90,7 +90,7 @@ export default function PartnerPage() {
         </div>
       </div>
 
-      <Footer />
+      <Footer prefixHome />
     </div>
   );
 }

@@ -65,7 +65,7 @@ export default async function FormatPage({
           Get a free quote
         </Link>
       </div>
-      <Footer />
+      <Footer prefixHome />
     </div>
   );
 }
