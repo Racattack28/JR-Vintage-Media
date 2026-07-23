@@ -91,8 +91,16 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="border-t border-[rgba(245,239,226,0.15)] mt-12 pt-6 flex items-center justify-between flex-wrap gap-3 text-[13px] text-[rgba(245,239,226,0.55)]">
-          <div>&copy; 2026 JR Vintage Media, by Jack Racovalis</div>
+        <div className="border-t border-[rgba(245,239,226,0.15)] mt-12 pt-6 flex items-center justify-between flex-wrap gap-4 text-[13px] text-[rgba(245,239,226,0.55)]">
+          <div className="flex items-center flex-wrap gap-x-5 gap-y-2">
+            <div>&copy; 2026 JR Vintage Media, by Jack Racovalis</div>
+            <Link href="/privacy" className="hover:text-[#f5efe2]">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-[#f5efe2]">
+              Terms &amp; Conditions
+            </Link>
+          </div>
           <div>Local &amp; mail-in service</div>
         </div>
       </div>
