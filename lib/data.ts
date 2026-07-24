@@ -81,7 +81,7 @@ export const partnerVerticals: PartnerVertical[] = [
     teaser:
       "Families preparing a tribute video or memorial slideshow often turn up tapes of the person being remembered, a wedding, a birthday, a Christmas morning, that haven't been watched in years. Getting that footage into a shareable digital file means it can actually make it into the service instead of sitting untouched in a drawer.",
     heroHeadline:
-      "A tape-to-digital and tribute video partner for the families you're already helping",
+      "Helping the families you serve bring old tapes into the tribute",
     paragraphs: [
       "When a family comes to you to plan a tribute video or memorial slideshow, there's often a box of old tapes sitting in the mix, a wedding video, a Christmas morning, a voice nobody's heard in years. Those tapes are usually the most meaningful part of the whole tribute, but they're also the hardest part to actually use, since most families don't have a working VCR anymore, let alone the patience to dig one out mid-arrangement.",
       "That's where I come in. You send the tapes my way, I convert them by hand on my own decks, and the digital files come back to you ready to drop straight into the tribute. If there's a service date to work around, tell me and I'll do what I can to get it back to you in time. Your name stays on the relationship, I just handle the part in between.",
@@ -93,7 +93,7 @@ export const partnerVerticals: PartnerVertical[] = [
     teaser:
       "Move-in day and memory programs both tend to surface boxes of family tapes that residents and their families haven't seen in decades. Turning them into digital files gives residents something real to watch during memory care activities, and gives families an easy way to revisit those moments together.",
     heroHeadline:
-      "A tape-to-digital partner for the memory programs you already run",
+      "Turning old family tapes into something residents can watch again",
     paragraphs: [
       "Move-in day and memory programs both have a way of surfacing boxes of family tapes, birthdays, holidays, home movies nobody in the family has watched since they were recorded. For residents living with memory loss, seeing that footage again can mean a lot more than a photo ever could.",
       "I convert those tapes into digital files your team or the resident's family can actually play, on a laptop, a TV, a tablet during a visit. If you're running memory programs or just want an easy way to help families preserve what they bring in, I can take the tape-handling part off your plate entirely.",
@@ -105,7 +105,7 @@ export const partnerVerticals: PartnerVertical[] = [
     teaser:
       "Family history research doesn't stop at documents and photographs. Client families frequently hand over VHS and camcorder tapes discovered mid-search, hoping they hold footage of relatives now gone. Converting those tapes turns a fragile, unplayable artifact into something that can be shared with the whole family.",
     heroHeadline:
-      "A tape-to-digital partner for the family histories you're already researching",
+      "When the family history you're building turns up a tape nobody can play",
     paragraphs: [
       "Family history research has a habit of turning up more than documents and photographs. Client families often hand over a VHS or camcorder tape mid-search, hoping it holds footage of a relative who's since passed, sometimes not even sure what's actually on it.",
       "I convert those tapes into digital files that can be added straight into the family record you're building, and returned to your client in a format they can actually watch and share. If a tape shows up partway through a project, send it my way and I'll get it back to you without holding up your research.",
@@ -117,7 +117,7 @@ export const partnerVerticals: PartnerVertical[] = [
     teaser:
       "Old tapes turn up constantly during decluttering and downsizing jobs, usually in a box nobody's opened in years, and clients rarely know what to do with them. Instead of the tapes going to landfill or back into storage, I can convert them so your client keeps the memories and still gets rid of the clutter.",
     heroHeadline:
-      "A tape-to-digital partner for the decluttering jobs you already run",
+      "That box of tapes your client can't part with? I'll take it from here",
     paragraphs: [
       "Old tapes turn up constantly during decluttering and downsizing jobs, usually forgotten at the bottom of a box, and clients rarely know what to do with them on the spot. It's an awkward moment: too meaningful to throw out, but not something anyone has a way to actually watch.",
       "Instead of that box going to landfill or straight into storage, I can convert the tapes so your client keeps the memories and you get to finish the job properly. You don't need to become the expert on old tape formats, just point them my way.",
@@ -140,8 +140,7 @@ export const partnerVerticals: PartnerVertical[] = [
     title: "Photo studios & scanning shops",
     teaser:
       "Many photo and film scanning shops don't offer video tape conversion, which means a customer walks in with tapes and has to be turned away or sent elsewhere. Partnering means you can say yes to the whole box, photos, film, and tapes, while I handle the tape conversion quietly behind the scenes.",
-    heroHeadline:
-      "A tape-to-digital partner for the boxes your shop can't fully finish",
+    heroHeadline: "Say yes to the whole box, tapes included",
     paragraphs: [
       "A lot of photo and film scanning shops don't offer video tape conversion, which puts you in an awkward spot when a customer walks in with a box that's photos, film, and a few old VHS tapes mixed together. Turning away the tapes means turning away part of the job.",
       "Partnering with me means you can say yes to the whole box. I handle the tape conversion side quietly behind the scenes, and the finished files come back to you to hand over however you normally would.",

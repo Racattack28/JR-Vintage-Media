@@ -29,8 +29,7 @@ export default function PartnerPage() {
               PARTNER WITH ME
             </div>
             <h1 className="font-[family-name:var(--font-bitter)] font-normal text-[40px] leading-[1.25] m-0 mb-6">
-              A tape-to-digital and tribute video service for the clients you
-              already serve
+              Helping the clients you already serve, one old tape at a time
             </h1>
             <p className="text-[16px] leading-[1.8] text-[rgba(245,239,226,0.75)] m-0 mb-8 max-w-[540px]">
               Funeral homes are usually the first to hear about it: a family

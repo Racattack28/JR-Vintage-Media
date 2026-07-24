@@ -51,12 +51,6 @@ export default async function PartnerVerticalPage({
       <div className="bg-[#2b2016] text-[#f5efe2]">
         <div className="max-w-[1240px] mx-auto px-6 md:px-12 py-[84px] grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <div>
-            <Link
-              href="/partner"
-              className="inline-block text-[13px] font-semibold text-[rgba(245,239,226,0.6)] hover:text-[#f5efe2] no-underline mb-6"
-            >
-              &larr; Partner with me
-            </Link>
             <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#d9a15a] mb-[14px]">
               FOR {vertical.title.toUpperCase()}
             </div>
