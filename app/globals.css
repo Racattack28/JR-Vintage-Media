@@ -235,6 +235,14 @@ select:focus {
   pointer-events: auto;
 }
 
+.jr-chevron {
+  transition: transform 0.2s ease;
+}
+
+.jr-dropdown:hover .jr-chevron {
+  transform: rotate(180deg);
+}
+
 .jr-dropdown-item {
   display: block;
   padding: 9px 12px;
