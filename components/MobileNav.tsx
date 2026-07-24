@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { formatNavItems, partnerNavItems } from "@/lib/data";
+import { formatNavItems, partnerVerticals } from "@/lib/data";
 
 const linkClass =
   "block py-3 text-[15px] font-medium text-[#2b2016] no-underline border-b border-[rgba(43,32,22,0.1)]";
@@ -93,14 +93,14 @@ export default function MobileNav({ prefixHome }: { prefixHome: boolean }) {
           </button>
           {partnerOpen && (
             <div className="pl-4 pb-2">
-              {partnerNavItems.map((item) => (
+              {partnerVerticals.map((item) => (
                 <Link
-                  key={item.label}
-                  href="/partner"
+                  key={item.slug}
+                  href={`/partner/${item.slug}`}
                   className="block py-2 text-[14px] text-[rgba(43,32,22,0.75)] no-underline"
                   onClick={close}
                 >
-                  {item.label}
+                  {item.title}
                 </Link>
               ))}
             </div>

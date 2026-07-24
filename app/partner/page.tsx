@@ -74,18 +74,21 @@ export default function PartnerPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {partnerVerticals.map((vertical) => (
-            <div
+            <Link
               key={vertical.slug}
-              id={vertical.slug}
-              className="border border-[rgba(43,32,22,0.16)] rounded-[18px] p-8 bg-[#fffaf0] scroll-mt-[170px]"
+              href={`/partner/${vertical.slug}`}
+              className="group block border border-[rgba(43,32,22,0.16)] rounded-[18px] p-8 bg-[#fffaf0] no-underline hover:border-[#bf4e2a] transition-colors"
             >
-              <h3 className="font-[family-name:var(--font-bitter)] font-normal text-[22px] m-0 mb-3">
+              <h3 className="font-[family-name:var(--font-bitter)] font-normal text-[22px] m-0 mb-3 text-[#2b2016]">
                 {vertical.title}
               </h3>
-              <p className="text-[15px] leading-[1.7] text-[rgba(43,32,22,0.75)] m-0">
-                {vertical.description}
+              <p className="text-[15px] leading-[1.7] text-[rgba(43,32,22,0.75)] m-0 mb-4">
+                {vertical.teaser}
               </p>
-            </div>
+              <span className="text-[14px] font-semibold text-[#bf4e2a] group-hover:text-[#9c3d1f]">
+                Learn more &rarr;
+              </span>
+            </Link>
           ))}
         </div>
       </div>

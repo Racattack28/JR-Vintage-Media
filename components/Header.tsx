@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import MobileNav from "@/components/MobileNav";
-import { formatNavItems, partnerNavItems } from "@/lib/data";
+import { formatNavItems, partnerVerticals } from "@/lib/data";
 
 type HeaderVariant = "site" | "format" | "order";
 
@@ -62,9 +62,13 @@ function NavLinks({ prefixHome }: { prefixHome: boolean }) {
         </div>
         <div className="jr-dropdown-menu">
           <div className="jr-dropdown-menu-inner">
-            {partnerNavItems.map((item) => (
-              <Link key={item.label} href="/partner" className="jr-dropdown-item">
-                {item.label}
+            {partnerVerticals.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/partner/${item.slug}`}
+                className="jr-dropdown-item"
+              >
+                {item.title}
               </Link>
             ))}
           </div>
