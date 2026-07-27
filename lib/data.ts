@@ -72,12 +72,14 @@ export interface PartnerVertical {
   teaser: string;
   heroHeadline: string;
   paragraphs: string[];
+  image: string;
 }
 
 export const partnerVerticals: PartnerVertical[] = [
   {
     slug: "funeral-homes",
     title: "Funeral homes",
+    image: "/partner/funeral-homes.png",
     teaser:
       "Families preparing a tribute video or memorial slideshow often turn up tapes of the person being remembered, a wedding, a birthday, a Christmas morning, that haven't been watched in years. Getting that footage into a shareable digital file means it can actually make it into the service instead of sitting untouched in a drawer.",
     heroHeadline:
@@ -90,6 +92,7 @@ export const partnerVerticals: PartnerVertical[] = [
   {
     slug: "senior-living",
     title: "Senior living & memory care",
+    image: "/partner/senior-living.png",
     teaser:
       "Move-in day and memory programs both tend to surface boxes of family tapes that residents and their families haven't seen in decades. Turning them into digital files gives residents something real to watch during memory care activities, and gives families an easy way to revisit those moments together.",
     heroHeadline:
@@ -102,6 +105,7 @@ export const partnerVerticals: PartnerVertical[] = [
   {
     slug: "genealogy",
     title: "Genealogy services",
+    image: "/partner/genealogy.png",
     teaser:
       "Family history research doesn't stop at documents and photographs. Client families frequently hand over VHS and camcorder tapes discovered mid-search, hoping they hold footage of relatives now gone. Converting those tapes turns a fragile, unplayable artifact into something that can be shared with the whole family.",
     heroHeadline:
@@ -114,6 +118,7 @@ export const partnerVerticals: PartnerVertical[] = [
   {
     slug: "professional-organizers",
     title: "Professional organizers",
+    image: "/partner/professional-organizers.png",
     teaser:
       "Old tapes turn up constantly during decluttering and downsizing jobs, usually in a box nobody's opened in years, and clients rarely know what to do with them. Instead of the tapes going to landfill or back into storage, I can convert them so your client keeps the memories and still gets rid of the clutter.",
     heroHeadline:
@@ -126,6 +131,7 @@ export const partnerVerticals: PartnerVertical[] = [
   {
     slug: "wedding-videographers",
     title: "Wedding & event videographers",
+    image: "/partner/wedding-videographers.png",
     teaser:
       "When a booking calls for converting an older format you don't shoot on anymore, or your schedule is already full, I can take that job on as overflow work without it ever looking like it left your studio. It's a straightforward way to say yes to a client's older tapes without adding to your own workload.",
     heroHeadline:
@@ -138,6 +144,7 @@ export const partnerVerticals: PartnerVertical[] = [
   {
     slug: "photo-studios",
     title: "Photo studios & scanning shops",
+    image: "/partner/photo-studios.png",
     teaser:
       "Many photo and film scanning shops don't offer video tape conversion, which means a customer walks in with tapes and has to be turned away or sent elsewhere. Partnering means you can say yes to the whole box, photos, film, and tapes, while I handle the tape conversion quietly behind the scenes.",
     heroHeadline: "Say yes to the whole box, tapes included",

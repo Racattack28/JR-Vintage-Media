@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PlaceholderImage from "@/components/PlaceholderImage";
 import { partnerVerticals } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -77,11 +77,15 @@ export default async function PartnerVerticalPage({
               Get a free quote
             </Link>
           </div>
-          <PlaceholderImage
-            alt={`Drop a photo relevant to ${vertical.title.toLowerCase()}`}
-            heightClass="h-[420px]"
-            shadow
-          />
+          <div className="relative w-full h-[420px] rounded-[18px] overflow-hidden shadow-[0_24px_50px_-20px_rgba(43,32,22,0.35)]">
+            <Image
+              src={vertical.image}
+              alt={vertical.title}
+              fill
+              sizes="(min-width: 1024px) 544px, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
 
