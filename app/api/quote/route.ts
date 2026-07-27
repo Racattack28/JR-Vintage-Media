@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendQuoteNotification } from "@/lib/mailer";
 
 interface QuoteRequestBody {
   serviceType: "local" | "mail" | null;
@@ -50,19 +51,20 @@ export async function POST(request: Request) {
 
   const orderNumber = generateOrderNumber();
 
-  // TODO: Wire up a real email service (e.g. Resend, SendGrid, Postmark, or
-  // SMTP via nodemailer) to notify the business owner (Jack) at his inbox
-  // whenever a new quote request comes in. For now this just logs the lead
-  // server-side so nothing is silently lost during development.
-  //
-  // Example with Resend once an API key is configured:
-  //   await resend.emails.send({
-  //     from: 'quotes@jrvintagemedia.com',
-  //     to: 'jack@jrvintagemedia.com',
-  //     subject: `New quote request ${orderNumber}`,
-  //     text: JSON.stringify(body, null, 2),
-  //   });
   console.log("[quote] New quote request", orderNumber, JSON.stringify(body));
+
+  try {
+    const result = await sendQuoteNotification({ orderNumber, ...body });
+    if (!result.sent) {
+      console.error("[quote] Email not sent:", result.reason);
+    }
+  } catch (err) {
+    // Don't fail the customer's submission just because the notification
+    // email had a problem, their details are already logged above so
+    // Jack can follow up manually if needed. Log loudly so it's visible
+    // in the hosting provider's server logs.
+    console.error("[quote] Failed to send notification email:", err);
+  }
 
   return NextResponse.json({ orderNumber });
 }
