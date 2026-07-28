@@ -8,7 +8,7 @@ import { partnerVerticals } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Partner with me | JR Vintage Media",
   description:
-    "A tape-to-digital and tribute video service for the clients you already serve. Bulk conversion, tribute video add-ons, and a quiet white-label handoff for funeral homes, senior living, genealogy services, professional organizers, videographers, and photo studios.",
+    "A tape-to-digital and tribute video service for the clients you already serve. Bulk conversion, tribute video add-ons, and a quiet white-label handoff for funeral homes, senior living, genealogy services, professional organisers, videographers, and photo studios.",
 };
 
 const valueProps = [

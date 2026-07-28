@@ -75,7 +75,7 @@ export default function StepDetails({ state, onChange }: StepDetailsProps) {
         <textarea
           value={state.notes}
           onChange={(e) => onChange("notes", e.target.value)}
-          placeholder="Anything else I should know? (optional) e.g. specific tapes to prioritize, questions about the process, damage you've noticed..."
+          placeholder="Anything else I should know? (optional) e.g. specific tapes to prioritise, questions about the process, damage you've noticed..."
           rows={4}
           className={`${inputClass} resize-none`}
         />

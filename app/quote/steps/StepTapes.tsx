@@ -87,7 +87,7 @@ export default function StepTapes({
         </div>
         <div className="text-[13px] text-[rgba(43,32,22,0.55)] mb-[10px]">
           Not sure? That&apos;s completely fine, leave this at zero. I&apos;ll
-          check the actual runtime when I digitize each tape and email you
+          check the actual runtime when I digitise each tape and email you
           before doing any work if a long-recording charge applies.
         </div>
         <div className="flex flex-col gap-[10px]">

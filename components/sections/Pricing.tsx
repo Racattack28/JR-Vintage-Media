@@ -80,7 +80,7 @@ export default function Pricing() {
               Drive
             </div>
             <div className="text-[14px] text-[rgba(245,239,226,0.65)]">
-              Picked once your tapes are digitized. USB stick is
+              Picked once your tapes are digitised. USB stick is
               recommended.
             </div>
           </div>

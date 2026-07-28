@@ -117,7 +117,7 @@ export const partnerVerticals: PartnerVertical[] = [
   },
   {
     slug: "professional-organizers",
-    title: "Professional organizers",
+    title: "Professional organisers",
     image: "/partner/professional-organizers.png",
     teaser:
       "Old tapes turn up constantly during decluttering and downsizing jobs, usually in a box nobody's opened in years, and clients rarely know what to do with them. Instead of the tapes going to landfill or back into storage, I can convert them so your client keeps the memories and still gets rid of the clutter.",
