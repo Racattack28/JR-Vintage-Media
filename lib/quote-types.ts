@@ -20,7 +20,7 @@ export interface QuoteState {
 
 export const initialQuoteState: QuoteState = {
   serviceType: null,
-  vhsCount: 2,
+  vhsCount: 1,
   longMedCount: 0,
   longMaxCount: 0,
   deliveryMethod: "usb",

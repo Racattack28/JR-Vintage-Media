@@ -40,7 +40,7 @@ export default function StepReview({
         <div className="flex justify-between py-[18px] px-6 border-b border-[rgba(43,32,22,0.12)]">
           <div className="text-[rgba(43,32,22,0.6)] text-[14px]">Tapes</div>
           <div className="font-semibold text-[14px] text-right">
-            {totalTapes} tapes, ${tapeSubtotal}
+            {totalTapes} {totalTapes === 1 ? "tape" : "tapes"}, ${tapeSubtotal}
             {longSummary && (
               <>
                 <br />

@@ -74,7 +74,7 @@ export default function StepTapes({
 
       <div className="flex items-center justify-between bg-[#2b2016] text-[#f5efe2] rounded-[14px] py-5 px-6">
         <div className="text-[14px]">
-          {vhsCount} tapes &times; ${pricePerTape} each
+          {vhsCount} {vhsCount === 1 ? "tape" : "tapes"} &times; ${pricePerTape} each
         </div>
         <div className="font-[family-name:var(--font-barlow)] text-[19px]">
           ${tapeSubtotal}
