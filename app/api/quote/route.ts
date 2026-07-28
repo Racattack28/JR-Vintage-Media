@@ -25,6 +25,7 @@ interface QuoteRequestBody {
     state: string | null;
     zip: string | null;
   };
+  notes: string | null;
   grandTotal: number;
 }
 

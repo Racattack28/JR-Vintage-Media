@@ -8,6 +8,7 @@ interface StepReviewProps {
   deliverySummary: string;
   name: string;
   email: string;
+  notes: string;
   grandTotal: number;
 }
 
@@ -19,6 +20,7 @@ export default function StepReview({
   deliverySummary,
   name,
   email,
+  notes,
   grandTotal,
 }: StepReviewProps) {
   return (
@@ -48,8 +50,12 @@ export default function StepReview({
           </div>
         </div>
         <div className="flex justify-between py-[18px] px-6 border-b border-[rgba(43,32,22,0.12)]">
-          <div className="text-[rgba(43,32,22,0.6)] text-[14px]">Delivery</div>
-          <div className="font-semibold text-[14px]">{deliverySummary}</div>
+          <div className="text-[rgba(43,32,22,0.6)] text-[14px] shrink-0 mr-4">
+            Delivery
+          </div>
+          <div className="font-semibold text-[14px] text-right">
+            {deliverySummary}
+          </div>
         </div>
         <div className="flex justify-between py-[18px] px-6 border-b border-[rgba(43,32,22,0.12)]">
           <div className="text-[rgba(43,32,22,0.6)] text-[14px]">Contact</div>
@@ -59,6 +65,14 @@ export default function StepReview({
             {email}
           </div>
         </div>
+        {notes.trim() && (
+          <div className="flex justify-between py-[18px] px-6 border-b border-[rgba(43,32,22,0.12)]">
+            <div className="text-[rgba(43,32,22,0.6)] text-[14px]">Notes</div>
+            <div className="font-semibold text-[14px] text-right max-w-[280px]">
+              {notes}
+            </div>
+          </div>
+        )}
         <div className="flex justify-between items-center py-[22px] px-6 bg-[#2b2016] text-[#f5efe2]">
           <div>
             <div className="text-[15px]">Estimated total</div>

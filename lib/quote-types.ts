@@ -15,6 +15,7 @@ export interface QuoteState {
   city: string;
   state: string;
   zip: string;
+  notes: string;
 }
 
 export const initialQuoteState: QuoteState = {
@@ -30,6 +31,7 @@ export const initialQuoteState: QuoteState = {
   city: "",
   state: "",
   zip: "",
+  notes: "",
 };
 
 export function isStepValid(step: number, state: QuoteState): boolean {

@@ -49,7 +49,24 @@ export interface QuoteNotificationInput {
     state: string | null;
     zip: string | null;
   };
+  notes: string | null;
   grandTotal: number;
+}
+
+const DELIVERY_LABELS: Record<string, string> = {
+  usb: "USB stick",
+  harddrive: "External hard drive",
+  youtube: "Private YouTube link",
+  drive: "Google Drive",
+};
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 export async function sendQuoteNotification(
@@ -66,45 +83,98 @@ export async function sendQuoteNotification(
   }
 
   const notifyTo = process.env.QUOTE_NOTIFICATION_EMAIL || process.env.SMTP_USER!;
-  const { contact, tapes, delivery } = input;
+  const { contact, tapes, delivery, notes } = input;
 
-  const addressLines =
+  const serviceText = input.serviceType === "mail" ? "Mail-in" : "Local drop-off";
+
+  const tapesText =
+    `${tapes.count} tape${tapes.count === 1 ? "" : "s"} x $${tapes.pricePerTape} = $${tapes.subtotal}` +
+    (tapes.longSurcharge > 0
+      ? ` (+$${tapes.longSurcharge} long-recording surcharge: ${tapes.longMedCount} x 2-4hr, ${tapes.longMaxCount} x 4-6hr)`
+      : "");
+
+  const deliveryLabel = DELIVERY_LABELS[delivery.method] ?? delivery.method;
+  const deliveryText =
+    delivery.price > 0
+      ? `${deliveryLabel} — from $${delivery.price}${delivery.sizeLabel ? ` (${delivery.sizeLabel})` : ""}`
+      : `${deliveryLabel} (free)`;
+
+  const addressText =
     input.serviceType === "mail"
-      ? [
-          contact.address,
-          [contact.city, contact.state, contact.zip].filter(Boolean).join(", "),
-        ]
+      ? [contact.address, [contact.city, contact.state, contact.zip].filter(Boolean).join(", ")]
           .filter(Boolean)
-          .join("\n")
+          .join(", ")
       : null;
 
-  const lines = [
-    `New quote request: ${input.orderNumber}`,
+  const textLines = [
+    `New quote request ${input.orderNumber}`,
     "",
-    `Service: ${input.serviceType === "mail" ? "Mail-in" : "Local drop-off"}`,
-    "",
-    `Tapes: ${tapes.count} x $${tapes.pricePerTape} = $${tapes.subtotal}`,
-    tapes.longSurcharge > 0
-      ? `Long recordings: ${tapes.longMedCount} x 2-4hr, ${tapes.longMaxCount} x 4-6hr (+$${tapes.longSurcharge})`
-      : null,
-    "",
-    `Delivery: ${delivery.method}${delivery.sizeLabel ? ` (${delivery.sizeLabel})` : ""}${delivery.price > 0 ? ` +$${delivery.price}` : " (free)"}`,
+    `Service:  ${serviceText}`,
+    `Tapes:    ${tapesText}`,
+    `Delivery: ${deliveryText}`,
+    notes ? `Notes:    ${notes}` : null,
     "",
     `Estimated total: $${input.grandTotal}`,
     "",
-    "Contact:",
-    `  ${contact.name}`,
-    `  ${contact.email}`,
-    `  ${contact.phone}`,
-    addressLines ? `  ${addressLines.replace(/\n/g, "\n  ")}` : null,
+    "Contact",
+    `  Name:  ${contact.name}`,
+    `  Phone: ${contact.phone}`,
+    `  Email: ${contact.email}`,
+    addressText ? `  Address: ${addressText}` : null,
   ].filter((line): line is string => line !== null);
+
+  const row = (label: string, value: string) => `
+    <tr>
+      <td style="padding:7px 0;color:#8a7a63;font-size:13px;width:110px;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td>
+      <td style="padding:7px 0;color:#2b2016;font-size:14px;font-weight:600;">${escapeHtml(value)}</td>
+    </tr>`;
+
+  const html = `
+  <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
+    <div style="max-width:520px;margin:0 auto;background:#fffaf0;border-radius:14px;overflow:hidden;border:1px solid rgba(43,32,22,0.12);">
+      <div style="background:#2b2016;padding:26px 28px;">
+        <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
+          New quote request
+        </div>
+        <div style="color:#f5efe2;font-size:22px;">${escapeHtml(input.orderNumber)}</div>
+      </div>
+      <div style="padding:26px 28px;">
+        <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
+          ${row("Service", serviceText)}
+          ${row("Tapes", tapesText)}
+          ${row("Delivery", deliveryText)}
+          ${notes ? row("Notes", notes) : ""}
+        </table>
+
+        <div style="margin-top:10px;padding-top:20px;border-top:1px solid rgba(43,32,22,0.12);">
+          <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:1.5px;color:#8a7a63;text-transform:uppercase;margin-bottom:10px;">
+            Contact
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
+            ${row("Name", contact.name)}
+            ${row("Phone", contact.phone)}
+            ${row("Email", contact.email)}
+            ${addressText ? row("Address", addressText) : ""}
+          </table>
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:22px;background:#2b2016;border-radius:10px;font-family:Arial,sans-serif;">
+          <tr>
+            <td style="padding:16px 20px;color:rgba(245,239,226,0.75);font-size:13px;">Estimated total</td>
+            <td style="padding:16px 20px;color:#f5efe2;font-size:20px;font-weight:bold;text-align:right;">$${input.grandTotal}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>`;
 
   await client.sendMail({
     from: `"JR Vintage Media" <${process.env.SMTP_USER}>`,
     to: notifyTo,
     replyTo: contact.email,
     subject: `New quote request ${input.orderNumber} - ${contact.name}`,
-    text: lines.join("\n"),
+    text: textLines.join("\n"),
+    html,
   });
 
   return { sent: true };

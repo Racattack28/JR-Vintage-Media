@@ -88,6 +88,7 @@ export default function QuoteFlow() {
             state: isMail ? state.state : null,
             zip: isMail ? state.zip : null,
           },
+          notes: state.notes.trim() || null,
           grandTotal: totals.grandTotal,
         }),
       });
@@ -165,6 +166,7 @@ export default function QuoteFlow() {
             deliverySummary={deliverySummary}
             name={state.name}
             email={state.email}
+            notes={state.notes}
             grandTotal={totals.grandTotal}
           />
         )}
