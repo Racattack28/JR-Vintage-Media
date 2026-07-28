@@ -86,7 +86,7 @@ export const partnerVerticals: PartnerVertical[] = [
       "Helping the families you serve bring old tapes into the tribute",
     paragraphs: [
       "When a family comes to you to plan a tribute video or memorial slideshow, there's often a box of old tapes sitting in the mix, a wedding video, a Christmas morning, a voice nobody's heard in years. Those tapes are usually the most meaningful part of the whole tribute, but they're also the hardest part to actually use, since most families don't have a working VCR anymore, let alone the patience to dig one out mid-arrangement.",
-      "That's where I come in. You send the tapes my way, I convert them by hand on my own decks, and the digital files come back to you ready to drop straight into the tribute. If there's a service date to work around, tell me and I'll do what I can to get it back to you in time. Your name stays on the relationship, I just handle the part in between.",
+      "That's where I come in. You send the tapes my way, I convert them by hand, and the digital files come back to you ready to drop straight into the tribute. Let me know the service date when you send them through and I'll prioritise getting them back in time. Your name stays on the relationship, I just handle the part in between.",
     ],
   },
   {
