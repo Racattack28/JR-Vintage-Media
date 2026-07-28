@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HoverGlowLink from "@/components/HoverGlowLink";
 import { partnerVerticals } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -107,13 +108,13 @@ export default async function PartnerVerticalPage({
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {others.map((other) => (
-            <Link
+            <HoverGlowLink
               key={other.slug}
               href={`/partner/${other.slug}`}
-              className="block border border-[rgba(43,32,22,0.16)] rounded-[14px] py-4 px-5 bg-[#fffaf0] no-underline text-[15px] font-semibold text-[#2b2016] hover:border-[#bf4e2a] transition-colors"
+              className="block border border-[rgba(43,32,22,0.16)] rounded-[14px] py-4 px-5 bg-[#fffaf0] no-underline text-[15px] font-semibold text-[#2b2016] hover:border-[#bf4e2a] hover:-translate-y-1 hover:shadow-[0_16px_32px_-22px_rgba(43,32,22,0.35)]"
             >
               {other.title}
-            </Link>
+            </HoverGlowLink>
           ))}
         </div>
       </div>

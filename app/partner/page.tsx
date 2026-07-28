@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import HoverGlowLink from "@/components/HoverGlowLink";
 import { partnerVerticals } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -85,10 +86,10 @@ export default function PartnerPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {partnerVerticals.map((vertical) => (
-            <Link
+            <HoverGlowLink
               key={vertical.slug}
               href={`/partner/${vertical.slug}`}
-              className="group block border border-[rgba(43,32,22,0.16)] rounded-[18px] p-8 bg-[#fffaf0] no-underline hover:border-[#bf4e2a] transition-colors"
+              className="block border border-[rgba(43,32,22,0.16)] rounded-[18px] p-8 bg-[#fffaf0] no-underline hover:border-[#bf4e2a] hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_rgba(43,32,22,0.35)]"
             >
               <h3 className="font-[family-name:var(--font-bitter)] font-normal text-[22px] m-0 mb-3 text-[#2b2016]">
                 {vertical.title}
@@ -99,7 +100,7 @@ export default function PartnerPage() {
               <span className="text-[14px] font-semibold text-[#bf4e2a] group-hover:text-[#9c3d1f]">
                 Learn more &rarr;
               </span>
-            </Link>
+            </HoverGlowLink>
           ))}
         </div>
       </div>
