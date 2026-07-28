@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PlaceholderImage from "@/components/PlaceholderImage";
 import { partnerVerticals } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -63,11 +63,15 @@ export default function PartnerPage() {
               </Link>
             </div>
           </div>
-          <PlaceholderImage
-            alt="Drop a photo of Jack handing off a finished box of tapes to a local business partner"
-            heightClass="h-[420px]"
-            shadow
-          />
+          <div className="relative w-full h-[420px] rounded-[18px] overflow-hidden shadow-[0_24px_50px_-20px_rgba(43,32,22,0.35)]">
+            <Image
+              src="/partner/hub.png"
+              alt="Carefully handling a box ready to hand off to a local business partner"
+              fill
+              sizes="(min-width: 1024px) 544px, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
 
