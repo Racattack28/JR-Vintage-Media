@@ -48,12 +48,20 @@ export default function PartnerPage() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <Link
-              href="/quote"
-              className="jr-btn inline-block font-[family-name:var(--font-lato)] font-semibold text-[16px] bg-[#bf4e2a] hover:bg-[#9c3d1f] text-[#fffaf0] py-4 px-8 rounded-[30px]"
-            >
-              Get a free quote
-            </Link>
+            <div className="flex flex-wrap gap-x-6 gap-y-3 items-center">
+              <Link
+                href="/partner-enquiry"
+                className="jr-btn inline-block font-[family-name:var(--font-lato)] font-semibold text-[16px] bg-[#bf4e2a] hover:bg-[#9c3d1f] text-[#fffaf0] py-4 px-8 rounded-[30px]"
+              >
+                Enquire about partnering
+              </Link>
+              <Link
+                href="/quote"
+                className="text-[15px] font-semibold text-[#f5efe2] no-underline border-b-2 border-[#f5efe2] pb-[2px]"
+              >
+                Have your own tapes? Get a free quote
+              </Link>
+            </div>
           </div>
           <PlaceholderImage
             alt="Drop a photo of Jack handing off a finished box of tapes to a local business partner"

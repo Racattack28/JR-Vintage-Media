@@ -288,3 +288,157 @@ export async function sendCustomerConfirmation(
 
   return { sent: true };
 }
+
+export interface PartnerEnquiryInput {
+  referenceNumber: string;
+  businessName: string;
+  contactName: string;
+  email: string;
+  phone: string;
+  vertical: string | null;
+  message: string | null;
+}
+
+export async function sendPartnerEnquiryNotification(
+  input: PartnerEnquiryInput
+): Promise<{ sent: boolean; reason?: string }> {
+  const client = getTransporter();
+
+  if (!client) {
+    return {
+      sent: false,
+      reason:
+        "SMTP not configured (missing SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASSWORD env vars)",
+    };
+  }
+
+  const notifyTo = process.env.QUOTE_NOTIFICATION_EMAIL || process.env.SMTP_USER!;
+
+  const textLines = [
+    `New partner enquiry ${input.referenceNumber}`,
+    "",
+    `Business: ${input.businessName}`,
+    input.vertical ? `Type:     ${input.vertical}` : null,
+    input.message ? `Message:  ${input.message}` : null,
+    "",
+    "Contact",
+    `  Name:  ${input.contactName}`,
+    `  Phone: ${input.phone}`,
+    `  Email: ${input.email}`,
+  ].filter((line): line is string => line !== null);
+
+  const html = `
+  <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
+    <div style="max-width:520px;margin:0 auto;background:#fffaf0;border-radius:14px;overflow:hidden;border:1px solid rgba(43,32,22,0.12);">
+      <div style="background:#2b2016;padding:26px 28px;">
+        <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
+          New partner enquiry
+        </div>
+        <div style="color:#f5efe2;font-size:22px;">${escapeHtml(input.referenceNumber)}</div>
+      </div>
+      <div style="padding:26px 28px;">
+        <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
+          ${row("Business", input.businessName)}
+          ${input.vertical ? row("Type", input.vertical) : ""}
+          ${input.message ? row("Message", input.message) : ""}
+        </table>
+
+        <div style="margin-top:10px;padding-top:20px;border-top:1px solid rgba(43,32,22,0.12);">
+          <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:1.5px;color:#8a7a63;text-transform:uppercase;margin-bottom:10px;">
+            Contact
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
+            ${row("Name", input.contactName)}
+            ${row("Phone", input.phone)}
+            ${row("Email", input.email)}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  await client.sendMail({
+    from: `"JR Vintage Media" <${process.env.SMTP_USER}>`,
+    to: notifyTo,
+    replyTo: input.email,
+    subject: `New partner enquiry ${input.referenceNumber} - ${input.businessName}`,
+    text: textLines.join("\n"),
+    html,
+  });
+
+  return { sent: true };
+}
+
+export async function sendPartnerEnquiryConfirmation(
+  input: PartnerEnquiryInput
+): Promise<{ sent: boolean; reason?: string }> {
+  const client = getTransporter();
+
+  if (!client) {
+    return {
+      sent: false,
+      reason:
+        "SMTP not configured (missing SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASSWORD env vars)",
+    };
+  }
+
+  const firstName = input.contactName.trim().split(/\s+/)[0] || input.contactName;
+
+  const textLines = [
+    `Hi ${firstName},`,
+    "",
+    "Thanks for your interest in partnering with JR Vintage Media. I'll be in touch shortly to talk through how it could work for " +
+      `${input.businessName}.`,
+    "",
+    `Reference: ${input.referenceNumber}`,
+    `Business:  ${input.businessName}`,
+    input.vertical ? `Type:      ${input.vertical}` : null,
+    input.message ? `Message:   ${input.message}` : null,
+    "",
+    "If there's anything you'd like to add before then, just reply to this email, it comes straight to me.",
+    "",
+    "Thanks again,",
+    "Jack",
+    "JR Vintage Media",
+  ].filter((line): line is string => line !== null);
+
+  const html = `
+  <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
+    <div style="max-width:520px;margin:0 auto;background:#fffaf0;border-radius:14px;overflow:hidden;border:1px solid rgba(43,32,22,0.12);">
+      <div style="background:#2b2016;padding:26px 28px;">
+        <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
+          Reference ${escapeHtml(input.referenceNumber)}
+        </div>
+        <div style="color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)}. Got it.</div>
+      </div>
+      <div style="padding:26px 28px;">
+        <p style="margin:0 0 20px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
+          Thanks for your interest in partnering with JR Vintage Media. I'll be in touch shortly to talk through how it could work for ${escapeHtml(input.businessName)}.
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
+          ${row("Business", input.businessName)}
+          ${input.vertical ? row("Type", input.vertical) : ""}
+          ${input.message ? row("Message", input.message) : ""}
+        </table>
+
+        <p style="margin:22px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
+          If there's anything you'd like to add before then, just reply to this email, it comes straight to me.
+        </p>
+        <p style="margin:18px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
+          Thanks again,<br/>Jack, JR Vintage Media
+        </p>
+      </div>
+    </div>
+  </div>`;
+
+  await client.sendMail({
+    from: `"Jack at JR Vintage Media" <${process.env.SMTP_USER}>`,
+    to: input.email,
+    subject: `Got it, ${firstName}, thanks for your interest in partnering`,
+    text: textLines.join("\n"),
+    html,
+  });
+
+  return { sent: true };
+}
