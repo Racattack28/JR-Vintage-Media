@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
 import { disclaimerText } from "@/lib/data";
 
 const tiers = [
@@ -23,7 +24,7 @@ export default function Pricing() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-7">
           {tiers.map((tier) => (
-            <div
+            <TiltCard
               key={tier.label}
               className={`jr-price-card rounded-2xl p-8 ${
                 tier.accent
@@ -54,7 +55,7 @@ export default function Pricing() {
               >
                 per tape, standard play up to 2 hrs
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
 

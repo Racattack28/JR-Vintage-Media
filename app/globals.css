@@ -139,13 +139,20 @@ select:focus {
   color: #9c3d1f;
 }
 
-.jr-price-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+.jr-price-card:hover {
+  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.35);
 }
 
-.jr-price-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.35);
+.jr-tilt-card {
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jr-tilt-card {
+    transition: none;
+  }
 }
 
 .jr-nav-link {

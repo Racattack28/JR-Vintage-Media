@@ -35,7 +35,7 @@ export default function Faq() {
             <button
               key={cat}
               onClick={() => selectCategory(cat)}
-              className="cursor-pointer font-[family-name:var(--font-barlow)] text-[14px] font-semibold py-[9px] px-[18px] rounded-[30px] border-[1.5px]"
+              className="cursor-pointer font-[family-name:var(--font-barlow)] text-[14px] font-semibold py-[9px] px-[18px] rounded-[30px] border-[1.5px] transition-transform duration-200 ease-out hover:-translate-y-[3px] hover:shadow-[0_10px_20px_-10px_rgba(43,32,22,0.4)] active:translate-y-0 active:scale-95"
               style={{
                 borderColor: active ? "#bf4e2a" : "rgba(43,32,22,0.25)",
                 background: active ? "#bf4e2a" : "transparent",

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
 
 export default function About() {
   return (
@@ -8,7 +9,11 @@ export default function About() {
       className="block bg-[#ece1cb] py-[76px] px-6 md:px-12 scroll-mt-[60px]"
     >
       <div className="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-14 items-center">
-        <div className="relative w-full h-[340px] rounded-[18px] overflow-hidden">
+        <TiltCard
+          maxTilt={5}
+          lift={0}
+          className="relative w-full h-[340px] rounded-[18px] overflow-hidden shadow-[0_20px_40px_-26px_rgba(43,32,22,0.4)]"
+        >
           <Image
             src="/about-jack.jpg"
             alt="Jack Racovalis smiling, holding a pool cue at a bar"
@@ -16,7 +21,7 @@ export default function About() {
             sizes="(min-width: 1024px) 435px, 100vw"
             className="object-cover"
           />
-        </div>
+        </TiltCard>
         <div>
           <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
             WHO&apos;S BEHIND THIS

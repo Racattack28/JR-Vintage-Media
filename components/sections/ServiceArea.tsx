@@ -1,4 +1,5 @@
 import Reveal from "@/components/Reveal";
+import TiltCard from "@/components/TiltCard";
 
 export default function ServiceArea() {
   return (
@@ -13,7 +14,7 @@ export default function ServiceArea() {
         Wherever your tapes are, there&apos;s a way to get them to me.
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="border border-[rgba(43,32,22,0.16)] rounded-[18px] p-9 bg-[#fffaf0]">
+        <TiltCard className="border border-[rgba(43,32,22,0.16)] rounded-[18px] p-9 bg-[#fffaf0] hover:border-[#bf4e2a] hover:shadow-[0_20px_40px_-26px_rgba(43,32,22,0.35)]">
           <h3 className="font-[family-name:var(--font-bitter)] font-normal text-[26px] m-0 mb-3">
             Local drop-off
           </h3>
@@ -25,8 +26,8 @@ export default function ServiceArea() {
             <li>No shipping cost or risk</li>
             <li>Flexible drop-off scheduling</li>
           </ul>
-        </div>
-        <div className="border border-[rgba(43,32,22,0.16)] rounded-[18px] p-9 bg-[#fffaf0]">
+        </TiltCard>
+        <TiltCard className="border border-[rgba(43,32,22,0.16)] rounded-[18px] p-9 bg-[#fffaf0] hover:border-[#bf4e2a] hover:shadow-[0_20px_40px_-26px_rgba(43,32,22,0.35)]">
           <h3 className="font-[family-name:var(--font-bitter)] font-normal text-[26px] m-0 mb-3">
             Mail-in
           </h3>
@@ -38,7 +39,7 @@ export default function ServiceArea() {
             <li>Works from anywhere in the country</li>
             <li>Arrival confirmation by email</li>
           </ul>
-        </div>
+        </TiltCard>
       </div>
     </Reveal>
   );
