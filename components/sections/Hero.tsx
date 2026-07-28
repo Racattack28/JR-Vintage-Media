@@ -4,18 +4,18 @@ import { formatNavItems } from "@/lib/data";
 
 export default function Hero() {
   return (
-    <div className="flex flex-col gap-8 max-w-[1240px] mx-auto px-6 md:px-12 pt-12 pb-20">
+    <div className="flex flex-col gap-6 max-w-[1240px] mx-auto px-6 md:px-12 pt-10 pb-20">
       <div style={{ animation: "jr-fade-up 0.7s ease both" }}>
-        <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[18px]">
+        <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-3">
           TAPES IN. MEMORIES BACK.
         </div>
-        <h1 className="font-[family-name:var(--font-merriweather)] italic font-black text-[clamp(30px,4.5vw,54px)] leading-[1.35] m-0 mb-6">
+        <h1 className="font-[family-name:var(--font-merriweather)] italic font-black text-[clamp(34px,5.5vw,66px)] leading-[1.18] m-0 mb-5 max-w-[950px]">
           Some memories aren&apos;t lost,{" "}
           <em className="text-[#bf4e2a]">
             they&apos;re simply waiting to be played again.
           </em>
         </h1>
-        <p className="jr-hero-copy text-[17px] leading-[1.7] text-[rgba(43,32,22,0.75)] max-w-[480px] m-0 mb-[34px]">
+        <p className="jr-hero-copy text-[17px] leading-[1.7] text-[rgba(43,32,22,0.75)] max-w-[680px] m-0 mb-7">
           VHS and camcorder tapes degrade a little more every year. I
           transfer them by hand, one reel at a time, onto digital files you
           can keep and share. It&apos;s a one-person operation, so your tapes
