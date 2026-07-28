@@ -293,7 +293,7 @@ export interface DeliveryCatalogEntry {
   recommended?: boolean;
   desc: string;
   startingPrice?: number;
-  priceNote?: string;
+  note?: string;
 }
 
 export const deliveryCatalog: DeliveryCatalogEntry[] = [
@@ -303,21 +303,20 @@ export const deliveryCatalog: DeliveryCatalogEntry[] = [
     recommended: true,
     desc: "A physical backup you can hold onto and hand down.",
     startingPrice: 18,
-    priceNote:
-      "Price shown is the starting size. Once I know how much footage you have, I'll size it up if needed and confirm the final price before you're charged.",
+    note: "Price shown is the starting size. Once I know how much footage you have, I'll size it up if needed and confirm the final price before you're charged.",
   },
   {
     id: "harddrive",
     label: "External hard drive",
     desc: "Best for large or many-tape orders needing extra space.",
     startingPrice: 45,
-    priceNote:
-      "Price shown is the starting size. Once I know how much footage you have, I'll size it up if needed and confirm the final price before you're charged.",
+    note: "Price shown is the starting size. Once I know how much footage you have, I'll size it up if needed and confirm the final price before you're charged.",
   },
   {
     id: "youtube",
     label: "Private YouTube link",
     desc: "Unlisted video links only you and family can view.",
+    note: "Not every video can go up this way. YouTube's terms of service and community guidelines can flag or block certain content (for example, footage with copyrighted music or TV recordings), so an unlisted link isn't guaranteed to work for every tape.",
   },
   {
     id: "drive",

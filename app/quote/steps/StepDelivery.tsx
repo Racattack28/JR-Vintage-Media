@@ -60,9 +60,9 @@ export default function StepDelivery({
         })}
       </div>
 
-      {selectedEntry?.priceNote && (
+      {selectedEntry?.note && (
         <p className="text-[13px] leading-[1.6] text-[rgba(43,32,22,0.55)] italic m-0 mt-2">
-          {selectedEntry.priceNote}
+          {selectedEntry.note}
         </p>
       )}
     </div>
