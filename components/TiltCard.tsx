@@ -20,6 +20,10 @@ export default function TiltCard({
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Touch devices fire synthetic mouse events on tap with no real cursor
+    // movement, which would just snap the tilt to one spot. Skip it and let
+    // the CSS tap-press fallback (see .jr-tilt-card:active) take over.
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
     const rect = el.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;

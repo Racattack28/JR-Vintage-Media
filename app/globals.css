@@ -149,6 +149,16 @@ select:focus {
   will-change: transform;
 }
 
+@media (hover: none), (pointer: coarse) {
+  .jr-tilt-card {
+    transition: transform 0.2s ease;
+  }
+
+  .jr-tilt-card:active {
+    transform: scale(0.97);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .jr-tilt-card {
     transition: none;
