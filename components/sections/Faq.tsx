@@ -4,13 +4,22 @@ import { useState } from "react";
 import Reveal from "@/components/Reveal";
 import { faqCategories, faqData, type FaqCategory } from "@/lib/data";
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqData.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
+  })),
+};
+
 export default function Faq() {
   const [category, setCategory] = useState<FaqCategory>(faqCategories[0]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const visibleFaqs = faqData
-    .map((faq, i) => ({ ...faq, index: i }))
-    .filter((faq) => faq.cat === category);
 
   function selectCategory(cat: FaqCategory) {
     setCategory(cat);
@@ -22,6 +31,10 @@ export default function Faq() {
       id="faq"
       className="block max-w-[900px] mx-auto px-6 md:px-12 py-[46px] scroll-mt-[60px]"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
         FAQ
       </div>
@@ -48,17 +61,17 @@ export default function Faq() {
         })}
       </div>
       <div className="flex flex-col">
-        {visibleFaqs.map((faq) => {
-          const open = openIndex === faq.index;
+        {faqData.map((faq, index) => {
+          const open = openIndex === index;
+          const visible = faq.cat === category;
           return (
             <div
-              key={faq.index}
-              className="border-b border-[rgba(43,32,22,0.16)]"
+              key={index}
+              className={`border-b border-[rgba(43,32,22,0.16)] ${visible ? "" : "hidden"}`}
             >
               <button
-                onClick={() =>
-                  setOpenIndex((cur) => (cur === faq.index ? null : faq.index))
-                }
+                onClick={() => setOpenIndex((cur) => (cur === index ? null : index))}
+                aria-expanded={open}
                 className="cursor-pointer w-full text-left bg-transparent border-0 flex items-center justify-between gap-5 py-6"
               >
                 <div className="text-[17px] font-semibold">{faq.q}</div>
@@ -66,11 +79,16 @@ export default function Faq() {
                   {open ? "−" : "+"}
                 </div>
               </button>
-              {open && (
-                <p className="jr-faq-answer text-[15px] leading-[1.7] text-[rgba(43,32,22,0.7)] m-0 mb-[26px] max-w-[700px]">
-                  {faq.a}
-                </p>
-              )}
+              <div
+                className="grid transition-[grid-template-rows] duration-300 ease-out"
+                style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+              >
+                <div className="overflow-hidden">
+                  <p className="text-[15px] leading-[1.7] text-[rgba(43,32,22,0.7)] m-0 mb-[26px] max-w-[700px]">
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
             </div>
           );
         })}

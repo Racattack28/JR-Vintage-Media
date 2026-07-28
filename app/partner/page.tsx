@@ -5,12 +5,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HoverGlowLink from "@/components/HoverGlowLink";
 import { partnerVerticals } from "@/lib/data";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Partner with me | JR Vintage Media",
   description:
     "A tape-to-digital and tribute video service for the clients you already serve. Bulk conversion, tribute video add-ons, and a quiet white-label handoff for funeral homes, senior living, genealogy services, professional organisers, videographers, and photo studios.",
-};
+  path: "/partner",
+});
 
 const valueProps = [
   "Bulk and batch conversion, send five tapes or fifty, priced and handled the same careful way.",

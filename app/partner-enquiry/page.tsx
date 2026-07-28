@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import { partnerVerticals } from "@/lib/data";
+import { buildMetadata } from "@/lib/seo";
 import PartnerEnquiryForm from "./PartnerEnquiryForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Partner enquiry | JR Vintage Media",
   description:
     "Get in touch to talk through how partnering with JR Vintage Media could work for your business.",
-};
+  path: "/partner-enquiry",
+});
 
 export default async function PartnerEnquiryPage({
   searchParams,

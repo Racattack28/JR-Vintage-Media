@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Merriweather, Bitter, Barlow_Semi_Condensed, Lato } from "next/font/google";
+import { buildMetadata, siteUrl } from "@/lib/seo";
+import { formatData, formatSlugs } from "@/lib/data";
 import "./globals.css";
 
 const merriweather = Merriweather({
@@ -28,30 +30,16 @@ const lato = Lato({
   weight: ["400", "700", "900"],
 });
 
-const siteUrl = "https://jrvintagemedia.com";
-const title = "JR Vintage Media | Tape-to-digital VHS transfer";
 const description =
   "JR Vintage Media converts VHS, VHS-C, S-VHS, Video8, Hi8, Digital8 and MiniDV tapes to digital files. Local drop-off or mail-in, free tape cleaning and repair, simple per-tape pricing.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title,
-  description,
-  openGraph: {
-    title,
+  ...buildMetadata({
+    title: "JR Vintage Media | Tape-to-digital VHS transfer",
     description,
-    url: siteUrl,
-    siteName: "JR Vintage Media",
-    images: [{ url: "/hero-tapes.png", width: 2000, height: 1500 }],
-    locale: "en_AU",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: ["/hero-tapes.png"],
-  },
+    path: "/",
+  }),
 };
 
 const localBusinessJsonLd = {
@@ -69,6 +57,14 @@ const localBusinessJsonLd = {
   areaServed: "AU",
   priceRange: "$$",
   description,
+  makesOffer: formatSlugs.map((slug) => ({
+    "@type": "Offer",
+    itemOffered: {
+      "@type": "Service",
+      name: `${formatData[slug].title} to digital conversion`,
+      description: formatData[slug].description,
+    },
+  })),
 };
 
 export default function RootLayout({

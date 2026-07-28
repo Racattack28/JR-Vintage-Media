@@ -61,21 +61,6 @@ select:focus {
   animation: jr-fade-up 0.4s ease both;
 }
 
-@keyframes jr-faq-open {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.jr-faq-answer {
-  animation: jr-faq-open 0.25s ease both;
-}
-
 .jr-reveal {
   opacity: 0;
   transform: translateY(24px);

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Terms and Conditions | JR Vintage Media",
   description:
     "Terms and conditions for sending tapes to JR Vintage Media for digital conversion.",
-};
+  path: "/terms",
+});
 
 const h2Class = "font-[family-name:var(--font-bitter)] font-normal text-[24px] mt-10 mb-3";
 const pClass = "text-[15px] leading-[1.75] text-[rgba(43,32,22,0.75)] m-0 mb-4";

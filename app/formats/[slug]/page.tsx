@@ -5,6 +5,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { formatData, formatSlugs, type FormatSlug } from "@/lib/data";
+import { buildMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return formatSlugs.map((slug) => ({ slug }));
@@ -18,10 +19,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = formatData[slug as FormatSlug];
   if (!entry) return {};
-  return {
+  return buildMetadata({
     title: `${entry.title} tape transfer | JR Vintage Media`,
     description: entry.description,
-  };
+    path: `/formats/${slug}`,
+  });
 }
 
 export default async function FormatPage({

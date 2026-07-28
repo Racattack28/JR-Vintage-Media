@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HoverGlowLink from "@/components/HoverGlowLink";
 import { partnerVerticals } from "@/lib/data";
+import { buildMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return partnerVerticals.map((vertical) => ({ slug: vertical.slug }));
@@ -19,10 +20,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const vertical = partnerVerticals.find((v) => v.slug === slug);
   if (!vertical) return {};
-  return {
+  return buildMetadata({
     title: `Partner with me | ${vertical.title} | JR Vintage Media`,
     description: vertical.teaser,
-  };
+    path: `/partner/${slug}`,
+  });
 }
 
 const valueProps = [
