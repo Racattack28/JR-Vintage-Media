@@ -69,21 +69,16 @@ function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
-export async function sendQuoteNotification(
-  input: QuoteNotificationInput
-): Promise<{ sent: boolean; reason?: string }> {
-  const client = getTransporter();
+function row(label: string, value: string): string {
+  return `
+    <tr>
+      <td style="padding:7px 0;color:#8a7a63;font-size:13px;width:110px;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td>
+      <td style="padding:7px 0;color:#2b2016;font-size:14px;font-weight:600;">${escapeHtml(value)}</td>
+    </tr>`;
+}
 
-  if (!client) {
-    return {
-      sent: false,
-      reason:
-        "SMTP not configured (missing SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASSWORD env vars)",
-    };
-  }
-
-  const notifyTo = process.env.QUOTE_NOTIFICATION_EMAIL || process.env.SMTP_USER!;
-  const { contact, tapes, delivery, notes } = input;
+function buildSummary(input: QuoteNotificationInput) {
+  const { contact, tapes, delivery } = input;
 
   const serviceText = input.serviceType === "mail" ? "Mail-in" : "Local drop-off";
 
@@ -106,6 +101,26 @@ export async function sendQuoteNotification(
           .join(", ")
       : null;
 
+  return { serviceText, tapesText, deliveryText, addressText };
+}
+
+export async function sendQuoteNotification(
+  input: QuoteNotificationInput
+): Promise<{ sent: boolean; reason?: string }> {
+  const client = getTransporter();
+
+  if (!client) {
+    return {
+      sent: false,
+      reason:
+        "SMTP not configured (missing SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASSWORD env vars)",
+    };
+  }
+
+  const notifyTo = process.env.QUOTE_NOTIFICATION_EMAIL || process.env.SMTP_USER!;
+  const { contact, notes } = input;
+  const { serviceText, tapesText, deliveryText, addressText } = buildSummary(input);
+
   const textLines = [
     `New quote request ${input.orderNumber}`,
     "",
@@ -122,12 +137,6 @@ export async function sendQuoteNotification(
     `  Email: ${contact.email}`,
     addressText ? `  Address: ${addressText}` : null,
   ].filter((line): line is string => line !== null);
-
-  const row = (label: string, value: string) => `
-    <tr>
-      <td style="padding:7px 0;color:#8a7a63;font-size:13px;width:110px;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td>
-      <td style="padding:7px 0;color:#2b2016;font-size:14px;font-weight:600;">${escapeHtml(value)}</td>
-    </tr>`;
 
   const html = `
   <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
@@ -173,6 +182,106 @@ export async function sendQuoteNotification(
     to: notifyTo,
     replyTo: contact.email,
     subject: `New quote request ${input.orderNumber} - ${contact.name}`,
+    text: textLines.join("\n"),
+    html,
+  });
+
+  return { sent: true };
+}
+
+export async function sendCustomerConfirmation(
+  input: QuoteNotificationInput
+): Promise<{ sent: boolean; reason?: string }> {
+  const client = getTransporter();
+
+  if (!client) {
+    return {
+      sent: false,
+      reason:
+        "SMTP not configured (missing SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASSWORD env vars)",
+    };
+  }
+
+  const { contact, notes } = input;
+  const { serviceText, tapesText, deliveryText, addressText } = buildSummary(input);
+  const firstName = contact.name.trim().split(/\s+/)[0] || contact.name;
+
+  const nextStepText =
+    input.serviceType === "mail"
+      ? "Pack your tapes securely (a sturdy box with a bit of padding so they can't shift around) and post them to me. I'll email you to confirm as soon as they arrive."
+      : "Bring your tapes by for drop-off whenever suits you — no need to book a time, just reach out when you're on your way.";
+
+  const textLines = [
+    `Hi ${firstName},`,
+    "",
+    `Thanks for sending through your quote request — I've got it, and this email is your copy for reference.`,
+    "",
+    `Order: ${input.orderNumber}`,
+    `Service:  ${serviceText}`,
+    `Tapes:    ${tapesText}`,
+    `Delivery: ${deliveryText}`,
+    notes ? `Notes:    ${notes}` : null,
+    addressText ? `Address:  ${addressText}` : null,
+    "",
+    `Estimated total: $${input.grandTotal} (nothing to pay today)`,
+    "",
+    nextStepText,
+    "",
+    "I'll follow up personally by email soon to confirm the details above. If anything's changed or you've got questions in the meantime, just reply to this email — it comes straight to me.",
+    "",
+    "Thanks again,",
+    "Jack",
+    "JR Vintage Media",
+  ].filter((line): line is string => line !== null);
+
+  const html = `
+  <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
+    <div style="max-width:520px;margin:0 auto;background:#fffaf0;border-radius:14px;overflow:hidden;border:1px solid rgba(43,32,22,0.12);">
+      <div style="background:#2b2016;padding:26px 28px;">
+        <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
+          Order ${escapeHtml(input.orderNumber)}
+        </div>
+        <div style="color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)} — got it.</div>
+      </div>
+      <div style="padding:26px 28px;">
+        <p style="margin:0 0 18px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
+          ${escapeHtml(nextStepText)}
+        </p>
+        <p style="margin:0 0 20px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
+          Here's a copy of what you sent through, for your records:
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
+          ${row("Service", serviceText)}
+          ${row("Tapes", tapesText)}
+          ${row("Delivery", deliveryText)}
+          ${notes ? row("Notes", notes) : ""}
+          ${addressText ? row("Address", addressText) : ""}
+        </table>
+
+        <table style="width:100%;border-collapse:collapse;margin-top:22px;background:#2b2016;border-radius:10px;font-family:Arial,sans-serif;">
+          <tr>
+            <td style="padding:16px 20px;color:rgba(245,239,226,0.75);font-size:13px;">
+              Estimated total<br/><span style="font-size:11px;color:rgba(245,239,226,0.55);">nothing to pay today</span>
+            </td>
+            <td style="padding:16px 20px;color:#f5efe2;font-size:20px;font-weight:bold;text-align:right;vertical-align:middle;">$${input.grandTotal}</td>
+          </tr>
+        </table>
+
+        <p style="margin:22px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
+          I'll follow up personally by email soon to confirm the details above. If anything's changed or you've got questions in the meantime, just reply to this email — it comes straight to me.
+        </p>
+        <p style="margin:18px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
+          Thanks again,<br/>Jack — JR Vintage Media
+        </p>
+      </div>
+    </div>
+  </div>`;
+
+  await client.sendMail({
+    from: `"Jack at JR Vintage Media" <${process.env.SMTP_USER}>`,
+    to: contact.email,
+    subject: `Got it, ${firstName} — your quote request (${input.orderNumber})`,
     text: textLines.join("\n"),
     html,
   });

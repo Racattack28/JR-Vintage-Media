@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendQuoteNotification } from "@/lib/mailer";
+import { sendCustomerConfirmation, sendQuoteNotification } from "@/lib/mailer";
 
 interface QuoteRequestBody {
   serviceType: "local" | "mail" | null;
@@ -54,17 +54,27 @@ export async function POST(request: Request) {
 
   console.log("[quote] New quote request", orderNumber, JSON.stringify(body));
 
-  try {
-    const result = await sendQuoteNotification({ orderNumber, ...body });
-    if (!result.sent) {
-      console.error("[quote] Email not sent:", result.reason);
-    }
-  } catch (err) {
-    // Don't fail the customer's submission just because the notification
-    // email had a problem, their details are already logged above so
-    // Jack can follow up manually if needed. Log loudly so it's visible
-    // in the hosting provider's server logs.
-    console.error("[quote] Failed to send notification email:", err);
+  const emailInput = { orderNumber, ...body };
+
+  const [notifyResult, confirmationResult] = await Promise.allSettled([
+    sendQuoteNotification(emailInput),
+    sendCustomerConfirmation(emailInput),
+  ]);
+
+  // Don't fail the customer's submission just because an email had a
+  // problem, their details are already logged above so Jack can follow
+  // up manually if needed. Log loudly so it's visible in the hosting
+  // provider's server logs.
+  if (notifyResult.status === "rejected") {
+    console.error("[quote] Failed to send notification email:", notifyResult.reason);
+  } else if (!notifyResult.value.sent) {
+    console.error("[quote] Notification email not sent:", notifyResult.value.reason);
+  }
+
+  if (confirmationResult.status === "rejected") {
+    console.error("[quote] Failed to send customer confirmation email:", confirmationResult.reason);
+  } else if (!confirmationResult.value.sent) {
+    console.error("[quote] Customer confirmation email not sent:", confirmationResult.value.reason);
   }
 
   return NextResponse.json({ orderNumber });
