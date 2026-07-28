@@ -51,7 +51,7 @@ export default function MobileNav({ prefixHome }: { prefixHome: boolean }) {
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 right-0 bg-[#f5efe2] border-b border-[rgba(43,32,22,0.14)] px-6 py-2 shadow-[0_16px_24px_-12px_rgba(0,0,0,0.2)]">
+        <div className="absolute top-full left-0 right-0 max-h-[calc(100dvh-72px)] overflow-y-auto overscroll-contain bg-[#f5efe2] border-b border-[rgba(43,32,22,0.14)] px-6 py-2 shadow-[0_16px_24px_-12px_rgba(0,0,0,0.2)]">
           <Link href={`${base}#how`} className={linkClass} onClick={close}>
             How it works
           </Link>

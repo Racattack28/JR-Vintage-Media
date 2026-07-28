@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { partnerVerticals } from "@/lib/data";
+import { isValidEmail } from "@/lib/validation";
 
 const inputClass =
   "font-[family-name:var(--font-lato)] text-[15px] py-[14px] px-4 rounded-[10px] border border-[rgba(43,32,22,0.2)] bg-[#fffaf0] w-full";
@@ -22,7 +23,8 @@ export default function PartnerEnquiryForm({ initialVertical }: PartnerEnquiryFo
   const [error, setError] = useState<string | null>(null);
   const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
 
-  const valid = businessName.trim() && contactName.trim() && email.trim() && phone.trim();
+  const valid =
+    businessName.trim() && contactName.trim() && isValidEmail(email) && phone.trim();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -104,12 +106,14 @@ export default function PartnerEnquiryForm({ initialVertical }: PartnerEnquiryFo
             value={businessName}
             onChange={(e) => setBusinessName(e.target.value)}
             placeholder="Business name"
+            aria-label="Business name"
             className={inputClass}
           />
           <input
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
             placeholder="Your name"
+            aria-label="Your name"
             className={inputClass}
           />
         </div>
@@ -118,12 +122,15 @@ export default function PartnerEnquiryForm({ initialVertical }: PartnerEnquiryFo
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Phone number"
+            aria-label="Phone number"
+            type="tel"
             className={inputClass}
           />
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email address"
+            aria-label="Email address"
             type="email"
             className={inputClass}
           />
@@ -131,6 +138,7 @@ export default function PartnerEnquiryForm({ initialVertical }: PartnerEnquiryFo
         <select
           value={vertical}
           onChange={(e) => setVertical(e.target.value)}
+          aria-label="What type of business is this?"
           className={`${inputClass} appearance-none`}
         >
           <option value="">What type of business is this? (optional)</option>
@@ -145,6 +153,7 @@ export default function PartnerEnquiryForm({ initialVertical }: PartnerEnquiryFo
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="What would you like to know more about? (optional)"
+          aria-label="What would you like to know more about? (optional)"
           rows={4}
           className={`${inputClass} resize-none`}
         />

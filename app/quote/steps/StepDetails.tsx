@@ -26,12 +26,15 @@ export default function StepDetails({ state, onChange }: StepDetailsProps) {
             value={state.name}
             onChange={(e) => onChange("name", e.target.value)}
             placeholder="Full name"
+            aria-label="Full name"
             className={inputClass}
           />
           <input
             value={state.phone}
             onChange={(e) => onChange("phone", e.target.value)}
             placeholder="Phone number"
+            aria-label="Phone number"
+            type="tel"
             className={inputClass}
           />
         </div>
@@ -39,6 +42,7 @@ export default function StepDetails({ state, onChange }: StepDetailsProps) {
           value={state.email}
           onChange={(e) => onChange("email", e.target.value)}
           placeholder="Email address"
+          aria-label="Email address"
           type="email"
           className={inputClass}
         />
@@ -48,6 +52,7 @@ export default function StepDetails({ state, onChange }: StepDetailsProps) {
               value={state.address}
               onChange={(e) => onChange("address", e.target.value)}
               placeholder="Street address"
+              aria-label="Street address"
               className={inputClass}
             />
             <div className="grid grid-cols-1 sm:grid-cols-[1.4fr_1fr_1fr] gap-4">
@@ -55,18 +60,21 @@ export default function StepDetails({ state, onChange }: StepDetailsProps) {
                 value={state.city}
                 onChange={(e) => onChange("city", e.target.value)}
                 placeholder="City"
+                aria-label="City"
                 className={inputClass}
               />
               <input
                 value={state.state}
                 onChange={(e) => onChange("state", e.target.value)}
                 placeholder="State"
+                aria-label="State"
                 className={inputClass}
               />
               <input
                 value={state.zip}
                 onChange={(e) => onChange("zip", e.target.value)}
                 placeholder="ZIP"
+                aria-label="ZIP"
                 className={inputClass}
               />
             </div>
@@ -76,6 +84,7 @@ export default function StepDetails({ state, onChange }: StepDetailsProps) {
           value={state.notes}
           onChange={(e) => onChange("notes", e.target.value)}
           placeholder="Anything else I should know? (optional) e.g. specific tapes to prioritise, questions about the process, damage you've noticed..."
+          aria-label="Anything else I should know? (optional)"
           rows={4}
           className={`${inputClass} resize-none`}
         />

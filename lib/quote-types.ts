@@ -1,4 +1,5 @@
 import type { DeliveryMethod } from "./data";
+import { isValidEmail } from "./validation";
 
 export type ServiceType = "local" | "mail" | null;
 
@@ -46,7 +47,7 @@ export function isStepValid(step: number, state: QuoteState): boolean {
     case 3:
       return !!(
         state.name.trim() &&
-        state.email.trim() &&
+        isValidEmail(state.email) &&
         state.phone.trim() &&
         (!isMail ||
           (state.address.trim() &&
