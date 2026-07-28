@@ -1,25 +1,15 @@
-import { deliveryCatalog, hddSizes, usbSizes, type DeliveryMethod } from "@/lib/data";
+import { deliveryCatalog, type DeliveryMethod } from "@/lib/data";
 
 interface StepDeliveryProps {
   deliveryMethod: DeliveryMethod;
-  usbSize: string;
-  hddSize: string;
   onSelectMethod: (method: DeliveryMethod) => void;
-  onSelectUsbSize: (id: string) => void;
-  onSelectHddSize: (id: string) => void;
 }
 
 export default function StepDelivery({
   deliveryMethod,
-  usbSize,
-  hddSize,
   onSelectMethod,
-  onSelectUsbSize,
-  onSelectHddSize,
 }: StepDeliveryProps) {
-  const showSizePicker = deliveryMethod === "usb" || deliveryMethod === "harddrive";
-  const sizeOptions = deliveryMethod === "usb" ? usbSizes : hddSizes;
-  const activeSizeId = deliveryMethod === "usb" ? usbSize : hddSize;
+  const selectedEntry = deliveryCatalog.find((d) => d.id === deliveryMethod);
 
   return (
     <div className="jr-fade-up">
@@ -31,15 +21,12 @@ export default function StepDelivery({
         copy.
       </p>
 
-      <div className="flex flex-col gap-[14px] mb-6">
+      <div className="flex flex-col gap-[14px] mb-2">
         {deliveryCatalog.map((opt) => {
           const selected = deliveryMethod === opt.id;
-          const isFree = opt.id === "youtube" || opt.id === "drive";
-          const priceLabel = isFree
-            ? "Free"
-            : opt.id === "usb"
-            ? `from $${usbSizes[0].price}`
-            : `from $${hddSizes[0].price}`;
+          const priceLabel = opt.startingPrice
+            ? `from $${opt.startingPrice}`
+            : "Free";
 
           return (
             <button
@@ -73,38 +60,10 @@ export default function StepDelivery({
         })}
       </div>
 
-      {showSizePicker && (
-        <div>
-          <div className="text-[13px] font-semibold text-[rgba(43,32,22,0.6)] mb-[10px]">
-            {deliveryMethod === "usb" ? "Choose a USB size" : "Choose a hard drive size"}
-          </div>
-          <div className="flex flex-col gap-[10px]">
-            {sizeOptions.map((sz) => {
-              const selected = sz.id === activeSizeId;
-              return (
-                <button
-                  type="button"
-                  key={sz.id}
-                  onClick={() =>
-                    deliveryMethod === "usb"
-                      ? onSelectUsbSize(sz.id)
-                      : onSelectHddSize(sz.id)
-                  }
-                  className="cursor-pointer text-left flex items-center justify-between rounded-xl py-[14px] px-5 border-2"
-                  style={{
-                    borderColor: selected ? "#bf4e2a" : "rgba(43,32,22,0.16)",
-                    background: selected ? "#fbeee6" : "#fffaf0",
-                  }}
-                >
-                  <div className="text-[14px] font-semibold">{sz.label}</div>
-                  <div className="font-[family-name:var(--font-barlow)] text-[14px]">
-                    +${sz.price}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
+      {selectedEntry?.priceNote && (
+        <p className="text-[13px] leading-[1.6] text-[rgba(43,32,22,0.55)] italic m-0 mt-2">
+          {selectedEntry.priceNote}
+        </p>
       )}
     </div>
   );

@@ -8,8 +8,6 @@ export interface QuoteState {
   longMedCount: number;
   longMaxCount: number;
   deliveryMethod: DeliveryMethod;
-  usbSize: string;
-  hddSize: string;
   name: string;
   email: string;
   phone: string;
@@ -25,8 +23,6 @@ export const initialQuoteState: QuoteState = {
   longMedCount: 0,
   longMaxCount: 0,
   deliveryMethod: "usb",
-  usbSize: "32",
-  hddSize: "500gb",
   name: "",
   email: "",
   phone: "",

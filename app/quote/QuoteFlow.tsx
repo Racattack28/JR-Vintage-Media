@@ -40,9 +40,10 @@ export default function QuoteFlow() {
       : "";
   const deliveryMethodLabel =
     deliveryCatalog.find((d) => d.id === state.deliveryMethod)?.label ?? "";
-  const deliverySummary = totals.showSizePicker
-    ? `${deliveryMethodLabel} (${totals.deliverySizeLabel}, +$${totals.deliveryPrice})`
-    : `${deliveryMethodLabel} (free)`;
+  const deliverySummary =
+    totals.deliveryPrice > 0
+      ? `${deliveryMethodLabel} (from $${totals.deliveryPrice}, final size confirmed after conversion)`
+      : `${deliveryMethodLabel} (free)`;
 
   function goNext() {
     if (!isStepValid(step, state)) return;
@@ -72,7 +73,10 @@ export default function QuoteFlow() {
           },
           delivery: {
             method: state.deliveryMethod,
-            sizeLabel: totals.deliverySizeLabel,
+            sizeLabel:
+              totals.deliveryPrice > 0
+                ? "starting price, final size confirmed after conversion"
+                : null,
             price: totals.deliveryPrice,
           },
           contact: {
@@ -148,11 +152,7 @@ export default function QuoteFlow() {
         {step === 2 && (
           <StepDelivery
             deliveryMethod={state.deliveryMethod}
-            usbSize={state.usbSize}
-            hddSize={state.hddSize}
             onSelectMethod={(m) => update("deliveryMethod", m)}
-            onSelectUsbSize={(id) => update("usbSize", id)}
-            onSelectHddSize={(id) => update("hddSize", id)}
           />
         )}
         {step === 3 && <StepDetails state={state} onChange={update} />}

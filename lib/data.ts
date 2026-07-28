@@ -292,6 +292,8 @@ export interface DeliveryCatalogEntry {
   label: string;
   recommended?: boolean;
   desc: string;
+  startingPrice?: number;
+  priceNote?: string;
 }
 
 export const deliveryCatalog: DeliveryCatalogEntry[] = [
@@ -300,11 +302,17 @@ export const deliveryCatalog: DeliveryCatalogEntry[] = [
     label: "USB stick",
     recommended: true,
     desc: "A physical backup you can hold onto and hand down.",
+    startingPrice: 18,
+    priceNote:
+      "Price shown is the starting size. Once I know how much footage you have, I'll size it up if needed and confirm the final price before you're charged.",
   },
   {
     id: "harddrive",
     label: "External hard drive",
     desc: "Best for large or many-tape orders needing extra space.",
+    startingPrice: 45,
+    priceNote:
+      "Price shown is the starting size. Once I know how much footage you have, I'll size it up if needed and confirm the final price before you're charged.",
   },
   {
     id: "youtube",
@@ -316,23 +324,6 @@ export const deliveryCatalog: DeliveryCatalogEntry[] = [
     label: "Google Drive",
     desc: "Files uploaded to a shared Drive folder.",
   },
-];
-
-export interface SizeOption {
-  id: string;
-  label: string;
-  price: number;
-}
-
-export const usbSizes: SizeOption[] = [
-  { id: "32", label: "32GB", price: 18 },
-  { id: "128", label: "128GB", price: 28 },
-  { id: "256", label: "256GB", price: 40 },
-];
-
-export const hddSizes: SizeOption[] = [
-  { id: "500gb", label: "500GB", price: 45 },
-  { id: "1tb", label: "1TB", price: 60 },
 ];
 
 export const stepLabels = ["Service", "Tapes", "Storage", "Details", "Review"];
