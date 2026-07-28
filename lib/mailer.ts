@@ -91,7 +91,7 @@ function buildSummary(input: QuoteNotificationInput) {
   const deliveryLabel = DELIVERY_LABELS[delivery.method] ?? delivery.method;
   const deliveryText =
     delivery.price > 0
-      ? `${deliveryLabel} — from $${delivery.price}${delivery.sizeLabel ? ` (${delivery.sizeLabel})` : ""}`
+      ? `${deliveryLabel}, from $${delivery.price}${delivery.sizeLabel ? ` (${delivery.sizeLabel})` : ""}`
       : `${deliveryLabel} (free)`;
 
   const addressText =
@@ -206,15 +206,17 @@ export async function sendCustomerConfirmation(
   const { serviceText, tapesText, deliveryText, addressText } = buildSummary(input);
   const firstName = contact.name.trim().split(/\s+/)[0] || contact.name;
 
-  const nextStepText =
+  const openingText =
     input.serviceType === "mail"
-      ? "Pack your tapes securely (a sturdy box with a bit of padding so they can't shift around) and post them to me. I'll email you to confirm as soon as they arrive."
-      : "Bring your tapes by for drop-off whenever suits you — no need to book a time, just reach out when you're on your way.";
+      ? "I'll be in touch shortly to confirm everything. In the meantime, pack your tapes securely (a sturdy box with a bit of padding so they can't shift around) and post them through when you're ready."
+      : "I'll be in touch shortly to confirm everything and organise a time for you to drop your tapes by.";
 
   const textLines = [
     `Hi ${firstName},`,
     "",
-    `Thanks for sending through your quote request — I've got it, and this email is your copy for reference.`,
+    `Thanks for sending through your quote request. ${openingText}`,
+    "",
+    `Here's a copy of what you sent through, for your records:`,
     "",
     `Order: ${input.orderNumber}`,
     `Service:  ${serviceText}`,
@@ -225,9 +227,7 @@ export async function sendCustomerConfirmation(
     "",
     `Estimated total: $${input.grandTotal} (nothing to pay today)`,
     "",
-    nextStepText,
-    "",
-    "I'll follow up personally by email soon to confirm the details above. If anything's changed or you've got questions in the meantime, just reply to this email — it comes straight to me.",
+    "If anything's changed or you've got questions in the meantime, just reply to this email, it comes straight to me.",
     "",
     "Thanks again,",
     "Jack",
@@ -241,11 +241,11 @@ export async function sendCustomerConfirmation(
         <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
           Order ${escapeHtml(input.orderNumber)}
         </div>
-        <div style="color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)} — got it.</div>
+        <div style="color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)}. Got it.</div>
       </div>
       <div style="padding:26px 28px;">
         <p style="margin:0 0 18px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          ${escapeHtml(nextStepText)}
+          Thanks for sending through your quote request. ${escapeHtml(openingText)}
         </p>
         <p style="margin:0 0 20px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
           Here's a copy of what you sent through, for your records:
@@ -269,10 +269,10 @@ export async function sendCustomerConfirmation(
         </table>
 
         <p style="margin:22px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          I'll follow up personally by email soon to confirm the details above. If anything's changed or you've got questions in the meantime, just reply to this email — it comes straight to me.
+          If anything's changed or you've got questions in the meantime, just reply to this email, it comes straight to me.
         </p>
         <p style="margin:18px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          Thanks again,<br/>Jack — JR Vintage Media
+          Thanks again,<br/>Jack, JR Vintage Media
         </p>
       </div>
     </div>
@@ -281,7 +281,7 @@ export async function sendCustomerConfirmation(
   await client.sendMail({
     from: `"Jack at JR Vintage Media" <${process.env.SMTP_USER}>`,
     to: contact.email,
-    subject: `Got it, ${firstName} — your quote request (${input.orderNumber})`,
+    subject: `Got it, ${firstName}, your quote request (${input.orderNumber})`,
     text: textLines.join("\n"),
     html,
   });
