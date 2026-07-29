@@ -145,7 +145,7 @@ export async function sendQuoteNotification(
         <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
           New quote request
         </div>
-        <div style="color:#f5efe2;font-size:22px;">${escapeHtml(input.orderNumber)}</div>
+        <div style="font-family:Arial,sans-serif;color:#f5efe2;font-size:22px;font-weight:bold;">${escapeHtml(input.orderNumber)}</div>
       </div>
       <div style="padding:26px 28px;">
         <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
@@ -241,7 +241,7 @@ export async function sendCustomerConfirmation(
         <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
           Order ${escapeHtml(input.orderNumber)}
         </div>
-        <div style="color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)}. Got it.</div>
+        <div style="font-family:Arial,sans-serif;color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)}. Got it.</div>
       </div>
       <div style="padding:26px 28px;">
         <p style="margin:0 0 18px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
@@ -334,7 +334,7 @@ export async function sendPartnerEnquiryNotification(
         <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
           New partner enquiry
         </div>
-        <div style="color:#f5efe2;font-size:22px;">${escapeHtml(input.referenceNumber)}</div>
+        <div style="font-family:Arial,sans-serif;color:#f5efe2;font-size:22px;font-weight:bold;">${escapeHtml(input.referenceNumber)}</div>
       </div>
       <div style="padding:26px 28px;">
         <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
@@ -409,7 +409,7 @@ export async function sendPartnerEnquiryConfirmation(
         <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
           Reference ${escapeHtml(input.referenceNumber)}
         </div>
-        <div style="color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)}. Got it.</div>
+        <div style="font-family:Arial,sans-serif;color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)}. Got it.</div>
       </div>
       <div style="padding:26px 28px;">
         <p style="margin:0 0 20px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
