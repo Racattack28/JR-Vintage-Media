@@ -18,7 +18,7 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     slug: "vhs",
     title: "VHS",
     placeholder: "Photo of a VHS tape",
-    image: "/formats/vhs.png",
+    image: "/formats/vhs-tapes.png",
     description:
       "VHS was the standard videotape format in most home camcorders and VCRs from the late 1970s through the 2000s, storing video on a reel of magnetic tape inside a plastic cassette. This includes S-VHS (Super VHS), a higher-resolution version used by more serious home videographers from the late 1980s onward, which I convert the same way. The tape degrades a little more every time it's played and simply from sitting in storage, which is why converting to digital now preserves what's left of the picture and sound before further loss.",
   },
@@ -26,7 +26,7 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     slug: "vhs-c",
     title: "VHS-C",
     placeholder: "Photo of a VHS-C tape",
-    image: "/formats/vhs-c.png",
+    image: "/formats/vhs-c-tape.png",
     description:
       "VHS-C is the compact version of VHS, made for smaller camcorders and playable in a standard VCR with an adapter. It uses the same magnetic tape and is prone to the same age-related picture loss, so the transfer process is the same careful frame-by-frame capture as full-size VHS.",
   },
@@ -34,7 +34,7 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     slug: "hi8-video8",
     title: "Hi8 & Video8",
     placeholder: "Photo of a Hi8 tape",
-    image: "/formats/hi8-video8.png",
+    image: "/formats/hi8-tape.png",
     description:
       "Hi8 and Video8 were Sony's compact camcorder tape formats from the 1980s and 90s, with Hi8 offering a sharper, higher-resolution image than standard Video8. This also covers Digital8, which recorded a digital signal onto the same style of tape for cleaner picture quality with less generational loss. All three share the same small cassette shell, and playback decks for them are increasingly hard to find in good condition, which makes transferring sooner rather than later worthwhile.",
   },
