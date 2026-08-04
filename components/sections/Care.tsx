@@ -23,15 +23,23 @@ export default function Care() {
           </p>
         </div>
 
-        <video
-          className="w-full h-[500px] object-cover rounded-[18px] shadow-[0_18px_40px_rgba(43,32,22,0.18)]"
-          src="/videos/care-sample.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-        />
+        <div className="relative">
+          <div className="absolute -inset-[14px] border-[1.5px] border-dashed border-[rgba(43,32,22,0.25)] rounded-[24px] pointer-events-none" />
+          <div className="relative w-full h-[500px] rounded-[18px] overflow-hidden shadow-[0_18px_40px_rgba(43,32,22,0.18)]">
+            <video
+              className="w-full h-full object-cover"
+              src="/videos/care-sample.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+            />
+            <div className="absolute left-4 bottom-4 font-[family-name:var(--font-barlow)] text-[11px] tracking-[1px] text-[#f5efe2] bg-[rgba(43,32,22,0.65)] backdrop-blur-sm px-3 py-[7px] rounded-full">
+              An actual tape I&apos;ve converted, playing on repeat
+            </div>
+          </div>
+        </div>
       </div>
     </Reveal>
   );
