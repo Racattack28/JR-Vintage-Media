@@ -264,31 +264,31 @@ export const googleBusinessUrl: string | null =
 
 export const reviewData: ReviewEntry[] = [
   {
-    name: "jayden banks",
+    name: "Jayden",
     text: "Jack provided an outstanding service from start to finish. His professionalism, attention to detail, and genuine care for preserving precious memories really stood out. The quality of his work exceeded my expectations, and it was clear he took the time to handle everything with care. Communication was excellent throughout the process, and the turnaround was smooth and hassle-free. I highly recommend Jack to anyone looking to digitise and preserve their old tapes.",
     rating: 5,
     source: "google",
   },
   {
-    name: "Kaylene Buckley",
+    name: "Kaylene",
     text: "I highly recommend Jac for anyone wanting to preserve their precious memories. Jac transferred numerous old VHS tapes onto a USB for me, and I couldn't be happier with the service. Communication was excellent throughout the entire process.",
     rating: 5,
     source: "google",
   },
   {
-    name: "Azia Ligthart",
+    name: "Azia",
     text: "Jack was really helpful getting my home videos converted to usb. He took good care of them all and the results were great. Really happy with the service, thank you!!",
     rating: 5,
     source: "google",
   },
   {
-    name: "Daniel Harrick",
+    name: "Daniel",
     text: "Great service and communication! Would recommend for anyone wanting quick and easy physical to digital media transfers.",
     rating: 5,
     source: "google",
   },
   {
-    name: "holly Dobson",
+    name: "Holly",
     text: "Couldn't recommend JR Vintage Media enough! Jack was so lovely and genuine. He converted my old VHS tapes and made the whole process really easy. The videos turned out amazing, and it means so much to have those memories preserved. Thanks again, Jack!",
     rating: 5,
     source: "google",
