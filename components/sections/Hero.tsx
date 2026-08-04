@@ -17,10 +17,10 @@ export default function Hero() {
         </h1>
         <p className="jr-hero-copy text-[17px] leading-[1.7] text-[rgba(43,32,22,0.75)] max-w-[680px] m-0 mb-7">
           VHS and camcorder tapes degrade a little more every year. I
-          transfer them by hand, one reel at a time, onto digital files you
-          can keep and share, giving every tape the full attention it
-          deserves from the moment it arrives to the moment it&apos;s back in
-          your hands.
+          transfer them by hand, one reel at a time, right here on the
+          Sunshine Coast, onto digital files you can keep and share, giving
+          every tape the full attention it deserves from the moment it
+          arrives to the moment it&apos;s back in your hands.
         </p>
         <div className="flex gap-4 items-center">
           <Link

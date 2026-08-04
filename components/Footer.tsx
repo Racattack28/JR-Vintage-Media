@@ -30,6 +30,7 @@ export default function Footer({
               <div className="text-[#f5efe2] font-semibold">
                 Jack Racovalis
               </div>
+              <div>Mooloolaba, Sunshine Coast QLD</div>
               <a href="tel:+61481198213" className="hover:text-[#f5efe2]">
                 0481 198 213
               </a>
