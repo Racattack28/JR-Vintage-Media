@@ -60,6 +60,12 @@ const DELIVERY_LABELS: Record<string, string> = {
   drive: "Google Drive",
 };
 
+// Strips characters that could be used for SMTP header injection (CWE-93)
+// if user-supplied text ends up in a header field like Subject.
+function sanitizeHeaderValue(value: string): string {
+  return value.replace(/[\r\n]+/g, " ").trim();
+}
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -180,8 +186,8 @@ export async function sendQuoteNotification(
   await client.sendMail({
     from: `"JR Vintage Media" <${process.env.SMTP_USER}>`,
     to: notifyTo,
-    replyTo: contact.email,
-    subject: `New quote request ${input.orderNumber} - ${contact.name}`,
+    replyTo: sanitizeHeaderValue(contact.email),
+    subject: `New quote request ${input.orderNumber} - ${sanitizeHeaderValue(contact.name)}`,
     text: textLines.join("\n"),
     html,
   });
@@ -280,8 +286,8 @@ export async function sendCustomerConfirmation(
 
   await client.sendMail({
     from: `"Jack at JR Vintage Media" <${process.env.SMTP_USER}>`,
-    to: contact.email,
-    subject: `Got it, ${firstName}, your quote request (${input.orderNumber})`,
+    to: sanitizeHeaderValue(contact.email),
+    subject: `Got it, ${sanitizeHeaderValue(firstName)}, your quote request (${input.orderNumber})`,
     text: textLines.join("\n"),
     html,
   });
@@ -360,8 +366,8 @@ export async function sendPartnerEnquiryNotification(
   await client.sendMail({
     from: `"JR Vintage Media" <${process.env.SMTP_USER}>`,
     to: notifyTo,
-    replyTo: input.email,
-    subject: `New partner enquiry ${input.referenceNumber} - ${input.businessName}`,
+    replyTo: sanitizeHeaderValue(input.email),
+    subject: `New partner enquiry ${input.referenceNumber} - ${sanitizeHeaderValue(input.businessName)}`,
     text: textLines.join("\n"),
     html,
   });
@@ -434,8 +440,8 @@ export async function sendPartnerEnquiryConfirmation(
 
   await client.sendMail({
     from: `"Jack at JR Vintage Media" <${process.env.SMTP_USER}>`,
-    to: input.email,
-    subject: `Got it, ${firstName}, thanks for your interest in partnering`,
+    to: sanitizeHeaderValue(input.email),
+    subject: `Got it, ${sanitizeHeaderValue(firstName)}, thanks for your interest in partnering`,
     text: textLines.join("\n"),
     html,
   });

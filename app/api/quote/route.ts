@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { sendCustomerConfirmation, sendQuoteNotification } from "@/lib/mailer";
+import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 
 interface QuoteRequestBody {
   serviceType: "local" | "mail" | null;
@@ -35,6 +36,13 @@ function generateOrderNumber(): string {
 }
 
 export async function POST(request: Request) {
+  if (isRateLimited(getClientIp(request))) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   let body: QuoteRequestBody;
 
   try {

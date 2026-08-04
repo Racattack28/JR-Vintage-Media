@@ -3,6 +3,7 @@ import {
   sendPartnerEnquiryConfirmation,
   sendPartnerEnquiryNotification,
 } from "@/lib/mailer";
+import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 
 interface PartnerEnquiryBody {
   businessName: string;
@@ -19,6 +20,13 @@ function generateReferenceNumber(): string {
 }
 
 export async function POST(request: Request) {
+  if (isRateLimited(getClientIp(request))) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   let body: PartnerEnquiryBody;
 
   try {
