@@ -3,8 +3,10 @@ import Reveal from "@/components/Reveal";
 const items = [
   "FREE TAPE CLEANING & REPAIR",
   "LOCAL DROP-OFF OR MAIL-IN",
-  "VHS · VHS-C · MiniDV",
+  "VHS · VHS-C · Hi8 & Video8 · MiniDV · Other",
   "USB, HARD DRIVE, YOUTUBE, OR DRIVE",
+  "5.0★ RATED ON GOOGLE REVIEWS",
+  "SERVICING MOOLOOLABA & THE SUNSHINE COAST",
 ];
 
 // Repeated enough times that the track is comfortably wider than any
@@ -18,7 +20,7 @@ const trackItems = Array.from({ length: REPEATS }, () => items).flat();
 export default function TrustStrip() {
   return (
     <Reveal className="border-t border-b border-[rgba(43,32,22,0.14)] bg-[#ece1cb] overflow-hidden">
-      <div className="jr-marquee-track flex flex-nowrap w-max py-4 gap-[50px] font-[family-name:var(--font-barlow)] text-[11.5px] tracking-[0.5px] text-[#5a4a34] whitespace-nowrap">
+      <div className="jr-marquee-track flex flex-nowrap w-max py-4 gap-[50px] font-[family-name:var(--font-barlow)] text-[15px] tracking-[0.5px] text-[#5a4a34] whitespace-nowrap">
         {trackItems.map((item, i) => (
           <div key={i} className="jr-trust-item shrink-0">
             {item}

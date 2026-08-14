@@ -35,8 +35,8 @@ export default function Care() {
               playsInline
               preload="auto"
             />
-            <div className="absolute left-4 bottom-4 font-[family-name:var(--font-barlow)] text-[11px] tracking-[1px] text-[#f5efe2] bg-[rgba(43,32,22,0.65)] backdrop-blur-sm px-3 py-[7px] rounded-full">
-              An actual tape I&apos;ve converted, playing on repeat
+            <div className="absolute left-4 bottom-4 font-[family-name:var(--font-barlow)] text-[11px] tracking-[1px] uppercase text-[#f5efe2] bg-[rgba(43,32,22,0.65)] backdrop-blur-sm px-3 py-[7px] rounded-full">
+              A tape I have recently converted
             </div>
           </div>
         </div>
