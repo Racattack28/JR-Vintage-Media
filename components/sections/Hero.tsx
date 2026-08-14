@@ -1,28 +1,41 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatNavItems } from "@/lib/data";
 
 export default function Hero() {
   return (
-    <div className="flex flex-col gap-6 max-w-[1240px] mx-auto px-6 md:px-12 pt-10 pb-20">
-      <div style={{ animation: "jr-fade-up 0.7s ease both" }}>
-        <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-3">
+    <div className="relative overflow-hidden">
+      <Image
+        src="/hero-tapes.png"
+        alt="Stacks of VHS tapes and DVDs beside a CRT TV and VCR"
+        fill
+        sizes="100vw"
+        className="object-cover"
+        priority
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-[rgba(20,13,8,0.92)] via-[rgba(20,13,8,0.72)] to-[rgba(20,13,8,0.4)]" />
+      <div className="absolute inset-0 bg-[rgba(80,30,15,0.18)] mix-blend-multiply" />
+
+      <div
+        className="relative max-w-[1240px] mx-auto px-6 md:px-12 pt-28 pb-32 md:pt-36 md:pb-40 flex flex-col items-center text-center"
+        style={{ animation: "jr-fade-up 0.7s ease both" }}
+      >
+        <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#e8a874] mb-3">
           TAPES IN. MEMORIES BACK.
         </div>
-        <h1 className="font-[family-name:var(--font-merriweather)] italic font-black text-[clamp(34px,5.5vw,66px)] leading-[1.18] m-0 mb-5 max-w-[950px]">
+        <h1 className="font-[family-name:var(--font-merriweather)] italic font-black text-[clamp(34px,5.5vw,66px)] leading-[1.18] m-0 mb-5 max-w-[950px] text-[#f5efe2]">
           Some memories aren&apos;t lost,{" "}
-          <em className="text-[#bf4e2a]">
+          <em className="text-[#e8845a]">
             they&apos;re simply waiting to be played again.
           </em>
         </h1>
-        <p className="jr-hero-copy text-[17px] leading-[1.7] text-[rgba(43,32,22,0.75)] max-w-[680px] m-0 mb-7">
+        <p className="jr-hero-copy text-[17px] leading-[1.7] text-[rgba(245,239,226,0.85)] max-w-[680px] m-0 mb-7">
           VHS and camcorder tapes degrade a little more every year. I
           transfer them by hand, one reel at a time, right here on the
           Sunshine Coast, onto digital files you can keep and share, giving
           every tape the full attention it deserves from the moment it
           arrives to the moment it&apos;s back in your hands.
         </p>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center justify-center">
           <Link
             href="/quote"
             className="jr-btn font-[family-name:var(--font-lato)] font-semibold text-[15px] bg-[#bf4e2a] hover:bg-[#9c3d1f] text-[#fffaf0] py-[15px] px-7 rounded-[30px]"
@@ -31,36 +44,10 @@ export default function Hero() {
           </Link>
           <a
             href="#pricing"
-            className="text-[15px] font-semibold text-[#2b2016] no-underline border-b-2 border-[#2b2016] pb-[2px]"
+            className="jr-btn font-[family-name:var(--font-lato)] font-semibold text-[15px] text-[#f5efe2] border-[1.5px] border-[rgba(245,239,226,0.6)] hover:border-[#f5efe2] py-[13.5px] px-7 rounded-[30px]"
           >
             See pricing
           </a>
-        </div>
-      </div>
-      <div className="jr-hero-frame relative">
-        <div className="absolute -inset-[18px] border-[1.5px] border-dashed border-[rgba(43,32,22,0.25)] rounded-[22px] pointer-events-none" />
-        <div className="relative w-full h-[440px] rounded-[18px] overflow-hidden shadow-[0_24px_50px_-20px_rgba(43,32,22,0.35)]">
-          <Image
-            src="/hero-tapes.png"
-            alt="Stacks of VHS tapes and DVDs beside a CRT TV and VCR"
-            fill
-            sizes="(min-width: 1240px) 1144px, 100vw"
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="jr-hero-overlay">
-          <div className="grid grid-cols-5 gap-5 p-8">
-            {formatNavItems.map((item) => (
-              <Link
-                key={item.slug}
-                href={`/formats/${item.slug}`}
-                className="jr-hero-overlay-name text-center text-[#f5efe2] text-[13px] font-semibold no-underline"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </div>
