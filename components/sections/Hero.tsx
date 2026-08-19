@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <div className="relative overflow-hidden">
       <Image
-        src="/hero-tapes.png"
+        src="/hero-tapes-bg.jpg"
         alt="Stacks of VHS tapes and DVDs beside a CRT TV and VCR"
         fill
         sizes="100vw"

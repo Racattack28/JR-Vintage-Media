@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://jrvintagemedia.com";
 const siteName = "JR Vintage Media";
-const defaultImage = { url: "/hero-tapes.png", width: 2000, height: 1500 };
+const defaultImage = { url: "/hero-tapes-bg.jpg", width: 2000, height: 1414 };
 
 export function buildMetadata({
   title,
