@@ -9,16 +9,13 @@ export default function Hero() {
         alt="Stacks of VHS tapes and DVDs beside a CRT TV and VCR"
         fill
         sizes="100vw"
-        className="object-cover"
+        className="jr-hero-bg object-cover"
         priority
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[rgba(20,13,8,0.92)] via-[rgba(20,13,8,0.72)] to-[rgba(20,13,8,0.4)]" />
       <div className="absolute inset-0 bg-[rgba(80,30,15,0.18)] mix-blend-multiply" />
 
-      <div
-        className="relative max-w-[1240px] mx-auto px-6 md:px-12 pt-28 pb-32 md:pt-36 md:pb-40 flex flex-col items-center text-center"
-        style={{ animation: "jr-fade-up 0.7s ease both" }}
-      >
+      <div className="jr-hero-stagger relative max-w-[1240px] mx-auto px-6 md:px-12 pt-28 pb-32 md:pt-36 md:pb-40 flex flex-col items-center text-center">
         <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#e8a874] mb-3">
           TAPES IN. MEMORIES BACK.
         </div>

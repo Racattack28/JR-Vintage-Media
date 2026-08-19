@@ -30,18 +30,20 @@ export default function HowItWorks() {
       <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-11 max-w-[600px]">
         Three easy steps to bring your old memories back to life.
       </h2>
-      <div className="jr-grid-3 grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="jr-grid-3 jr-stagger grid grid-cols-1 lg:grid-cols-3 gap-10">
         {steps.map((step) => (
-          <div key={step.num} className="jr-how-step">
-            <div className="jr-how-num font-[family-name:var(--font-bitter)] text-[46px] text-[#bf4e2a] mb-[14px] transition-colors duration-[250ms]">
-              {step.num}
+          <div key={step.num} className="jr-stagger-item">
+            <div className="jr-how-step">
+              <div className="jr-how-num font-[family-name:var(--font-bitter)] text-[46px] text-[#bf4e2a] mb-[14px] transition-colors duration-[250ms]">
+                {step.num}
+              </div>
+              <h3 className="text-[19px] font-semibold m-0 mb-[10px]">
+                {step.title}
+              </h3>
+              <p className="text-[15px] leading-[1.7] text-[rgba(43,32,22,0.7)] m-0">
+                {step.body}
+              </p>
             </div>
-            <h3 className="text-[19px] font-semibold m-0 mb-[10px]">
-              {step.title}
-            </h3>
-            <p className="text-[15px] leading-[1.7] text-[rgba(43,32,22,0.7)] m-0">
-              {step.body}
-            </p>
           </div>
         ))}
       </div>

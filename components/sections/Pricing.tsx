@@ -22,40 +22,41 @@ export default function Pricing() {
           Simple, per-tape pricing. The more you send, the less each one
           costs.
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-7">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-7 jr-stagger">
           {tiers.map((tier) => (
-            <TiltCard
-              key={tier.label}
-              className={`jr-price-card rounded-2xl p-8 ${
-                tier.accent
-                  ? "bg-[#bf4e2a]"
-                  : "bg-[#3a2c1c] border border-[rgba(245,239,226,0.15)]"
-              }`}
-            >
-              <div
-                className={`font-[family-name:var(--font-barlow)] text-[12px] tracking-[1.5px] mb-4 ${
-                  tier.accent ? "text-[#f5efe2]" : "text-[#d9a15a]"
-                }`}
-              >
-                {tier.label}
-              </div>
-              <div
-                className={`font-[family-name:var(--font-bitter)] text-[48px] mb-[6px] ${
-                  tier.accent ? "text-[#fffaf0]" : ""
-                }`}
-              >
-                {tier.price}
-              </div>
-              <div
-                className={`text-[14px] ${
+            <div key={tier.label} className="jr-stagger-item">
+              <TiltCard
+                className={`jr-price-card rounded-2xl p-8 ${
                   tier.accent
-                    ? "text-[rgba(255,250,240,0.85)]"
-                    : "text-[rgba(245,239,226,0.65)]"
+                    ? "bg-[#bf4e2a]"
+                    : "bg-[#3a2c1c] border border-[rgba(245,239,226,0.15)]"
                 }`}
               >
-                per tape, standard play up to 2 hrs
-              </div>
-            </TiltCard>
+                <div
+                  className={`font-[family-name:var(--font-barlow)] text-[12px] tracking-[1.5px] mb-4 ${
+                    tier.accent ? "text-[#f5efe2]" : "text-[#d9a15a]"
+                  }`}
+                >
+                  {tier.label}
+                </div>
+                <div
+                  className={`font-[family-name:var(--font-bitter)] text-[48px] mb-[6px] ${
+                    tier.accent ? "text-[#fffaf0]" : ""
+                  }`}
+                >
+                  {tier.price}
+                </div>
+                <div
+                  className={`text-[14px] ${
+                    tier.accent
+                      ? "text-[rgba(255,250,240,0.85)]"
+                      : "text-[rgba(245,239,226,0.65)]"
+                  }`}
+                >
+                  per tape, standard play up to 2 hrs
+                </div>
+              </TiltCard>
+            </div>
           ))}
         </div>
 
