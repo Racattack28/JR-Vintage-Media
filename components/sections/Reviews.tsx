@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
-import { reviewData, googleBusinessUrl } from "@/lib/data";
+import { reviewData, googleBusinessUrl, type ReviewEntry } from "@/lib/data";
 
 function GoogleBadge() {
   const badge = (
@@ -40,6 +40,57 @@ function GoogleBadge() {
     >
       {badge}
     </a>
+  );
+}
+
+function ReviewCard({ review }: { review: ReviewEntry }) {
+  const [expanded, setExpanded] = useState(false);
+  const [overflowing, setOverflowing] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    // Once expanded, stop remeasuring - line-clamp is off so scrollHeight
+    // and clientHeight always match, which would otherwise flip the
+    // button off. Collapsing re-triggers this to measure again.
+    if (expanded) return;
+    const el = textRef.current;
+    if (!el) return;
+
+    const check = () => setOverflowing(el.scrollHeight > el.clientHeight + 1);
+    check();
+
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [expanded]);
+
+  return (
+    <div className="border border-[rgba(43,32,22,0.16)] rounded-2xl p-7 bg-[#fffaf0] h-full flex flex-col">
+      <div className="font-[family-name:var(--font-barlow)] text-[15px] text-[#bf4e2a] mb-[14px]">
+        {"★".repeat(review.rating)}
+        {"☆".repeat(Math.max(0, 5 - review.rating))}
+      </div>
+      <p
+        ref={textRef}
+        className={`text-[15px] leading-[1.7] text-[rgba(43,32,22,0.75)] m-0 mb-2 ${
+          expanded ? "" : "line-clamp-3"
+        }`}
+      >
+        {review.text}
+      </p>
+      {overflowing && (
+        <button
+          onClick={() => setExpanded((e) => !e)}
+          className="self-start bg-transparent border-0 p-0 mb-5 text-[13px] font-semibold text-[#bf4e2a] hover:text-[#9c3d1f] cursor-pointer"
+        >
+          {expanded ? "Read less" : "Read more"}
+        </button>
+      )}
+      <div className="mt-auto flex items-center justify-between gap-3">
+        <div className="text-[14px] font-semibold">{review.name}</div>
+        {review.source === "google" && <GoogleBadge />}
+      </div>
+    </div>
   );
 }
 
@@ -93,21 +144,7 @@ export default function Reviews() {
                 className="shrink-0 grow-0 px-3 box-border"
                 style={{ flexBasis: `${100 / visibleCards}%` }}
               >
-                <div className="border border-[rgba(43,32,22,0.16)] rounded-2xl p-7 bg-[#fffaf0] h-full flex flex-col">
-                  <div className="font-[family-name:var(--font-barlow)] text-[15px] text-[#bf4e2a] mb-[14px]">
-                    {"★".repeat(review.rating)}
-                    {"☆".repeat(Math.max(0, 5 - review.rating))}
-                  </div>
-                  <p className="text-[15px] leading-[1.7] text-[rgba(43,32,22,0.75)] m-0 mb-5">
-                    {review.text}
-                  </p>
-                  <div className="mt-auto flex items-center justify-between gap-3">
-                    <div className="text-[14px] font-semibold">
-                      {review.name}
-                    </div>
-                    {review.source === "google" && <GoogleBadge />}
-                  </div>
-                </div>
+                <ReviewCard review={review} />
               </div>
             ))}
           </div>

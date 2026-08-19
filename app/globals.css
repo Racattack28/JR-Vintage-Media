@@ -197,18 +197,6 @@ select:focus {
   }
 }
 
-.jr-how-step {
-  transition: transform 0.25s ease;
-}
-
-.jr-how-step:hover {
-  transform: translateY(-6px);
-}
-
-.jr-how-step:hover .jr-how-num {
-  color: #9c3d1f;
-}
-
 .jr-price-card:hover {
   box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.35);
 }
