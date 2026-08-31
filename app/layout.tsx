@@ -40,6 +40,14 @@ export const metadata: Metadata = {
     description,
     path: "/",
   }),
+  // Plain files under /public rather than the app/icon.png convention -
+  // Hostinger's build was reusing a stale cached render of that special
+  // route after the source image changed, while plain static files (like
+  // favicon.ico) always copy over correctly on deploy.
+  icons: {
+    icon: "/icon-jr-512.png",
+    apple: "/apple-touch-icon-jr.png",
+  },
 };
 
 const averageRating =
