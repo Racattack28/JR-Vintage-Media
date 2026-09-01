@@ -75,12 +75,134 @@ function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
+// ---------------------------------------------------------------------------
+// Email rendering helpers
+//
+// These land in Outlook for Windows, which renders with the Word engine:
+// no max-width on <div>, no rgba() colours (they fall back to black or drop
+// out), unreliable padding/background on <div>, no border-radius, and
+// margins on <p> are hit and miss. So the layout is nested presentation
+// <table>s with bgcolor attributes, a fixed 520px width, solid hex colours
+// and spacer rows instead of margins. A media query narrows it on phones
+// for clients that support one; Outlook keeps the fixed width.
+// ---------------------------------------------------------------------------
+
+const EMAIL = {
+  pageBg: "#f5efe2",
+  cardBg: "#fffaf0",
+  ink: "#2b2016",
+  inkText: "#f5efe2",
+  accent: "#d9a15a",
+  label: "#8a7a63",
+  hairline: "#e6e0d6", // was rgba(43,32,22,0.12) over the cream card
+  darkLabel: "#c3bbaf", // was rgba(245,239,226,0.75) over the dark panel
+  darkMuted: "#9a9286", // was rgba(245,239,226,0.55) over the dark panel
+} as const;
+
+const FONT = "Arial, Helvetica, sans-serif";
+
+function spacerRow(height: number): string {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td height="${height}" style="height:${height}px;line-height:${height}px;font-size:1px;">&nbsp;</td></tr></table>`;
+}
+
+function paragraph(html: string): string {
+  return `<p style="margin:0;font-family:${FONT};font-size:14px;line-height:1.6;color:${EMAIL.ink};">${html}</p>`;
+}
+
 function row(label: string, value: string): string {
   return `
     <tr>
-      <td style="padding:7px 0;color:#8a7a63;font-size:13px;width:110px;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td>
-      <td style="padding:7px 0;color:#2b2016;font-size:14px;font-weight:600;">${escapeHtml(value)}</td>
+      <td width="110" style="width:110px;padding:7px 12px 7px 0;font-family:${FONT};color:${EMAIL.label};font-size:13px;line-height:1.4;vertical-align:top;white-space:nowrap;">${escapeHtml(label)}</td>
+      <td style="padding:7px 0;font-family:${FONT};color:${EMAIL.ink};font-size:14px;line-height:1.5;font-weight:700;">${escapeHtml(value)}</td>
     </tr>`;
+}
+
+function rowsTable(rows: string): string {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;border-collapse:collapse;">${rows}</table>`;
+}
+
+function sectionBlock(label: string, inner: string): string {
+  return `${spacerRow(20)}
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="width:100%;border-collapse:collapse;">
+      <tr>
+        <td style="border-top:1px solid ${EMAIL.hairline};padding-top:20px;">
+          <p style="margin:0 0 10px;font-family:${FONT};font-size:11px;line-height:14px;letter-spacing:1.5px;color:${EMAIL.label};text-transform:uppercase;">${label}</p>
+          ${inner}
+        </td>
+      </tr>
+    </table>`;
+}
+
+function totalBox(label: string, amount: string, sub?: string): string {
+  return `
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="${EMAIL.ink}" style="width:100%;border-collapse:collapse;background-color:${EMAIL.ink};border-radius:10px;">
+      <tr>
+        <td style="padding:16px 20px;font-family:${FONT};font-size:13px;line-height:1.4;color:${EMAIL.darkLabel};vertical-align:middle;">${label}${
+          sub
+            ? `<br /><span style="font-size:11px;line-height:1.4;color:${EMAIL.darkMuted};">${sub}</span>`
+            : ""
+        }</td>
+        <td align="right" style="padding:16px 20px;font-family:${FONT};font-size:20px;line-height:1.2;font-weight:700;color:${EMAIL.inkText};text-align:right;vertical-align:middle;white-space:nowrap;">${amount}</td>
+      </tr>
+    </table>`;
+}
+
+function emailShell(opts: {
+  preheader: string;
+  kicker: string;
+  title: string;
+  titleBold?: boolean;
+  body: string;
+}): string {
+  const titleSize = opts.titleBold === false ? "20px" : "22px";
+  const titleWeight = opts.titleBold === false ? "normal" : "bold";
+  return `<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="x-apple-disable-message-reformatting" />
+<title>&nbsp;</title>
+<!--[if mso]>
+<noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml></noscript>
+<![endif]-->
+<style>
+  body, table, td, p, div { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+  table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; }
+  table { border-collapse:collapse; }
+  body { margin:0; padding:0; width:100% !important; background-color:${EMAIL.pageBg}; }
+  @media only screen and (max-width:600px) {
+    .email-card { width:100% !important; }
+    .email-pad { padding-left:20px !important; padding-right:20px !important; }
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:${EMAIL.pageBg};">
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:${EMAIL.pageBg};">${escapeHtml(opts.preheader)}</div>
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="${EMAIL.pageBg}" style="width:100%;background-color:${EMAIL.pageBg};">
+    <tr>
+      <td align="center" style="padding:32px 16px;font-family:${FONT};">
+        <!--[if mso]><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="520" align="center"><tr><td><![endif]-->
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="520" class="email-card" style="width:520px;max-width:520px;background-color:${EMAIL.cardBg};border:1px solid ${EMAIL.hairline};border-radius:14px;">
+          <tr>
+            <td class="email-pad" bgcolor="${EMAIL.ink}" style="background-color:${EMAIL.ink};padding:26px 28px;border-radius:14px 14px 0 0;">
+              <p style="margin:0 0 8px;font-family:${FONT};font-size:11px;line-height:14px;letter-spacing:2px;color:${EMAIL.accent};text-transform:uppercase;">${opts.kicker}</p>
+              <p style="margin:0;font-family:${FONT};font-size:${titleSize};line-height:1.3;font-weight:${titleWeight};color:${EMAIL.inkText};">${opts.title}</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="email-pad" style="padding:26px 28px;font-family:${FONT};">
+${opts.body}
+            </td>
+          </tr>
+        </table>
+        <!--[if mso]></td></tr></table><![endif]-->
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
 }
 
 function buildSummary(input: QuoteNotificationInput) {
@@ -144,44 +266,28 @@ export async function sendQuoteNotification(
     addressText ? `  Address: ${addressText}` : null,
   ].filter((line): line is string => line !== null);
 
-  const html = `
-  <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
-    <div style="max-width:520px;margin:0 auto;background:#fffaf0;border-radius:14px;overflow:hidden;border:1px solid rgba(43,32,22,0.12);">
-      <div style="background:#2b2016;padding:26px 28px;">
-        <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
-          New quote request
-        </div>
-        <div style="font-family:Arial,sans-serif;color:#f5efe2;font-size:22px;font-weight:bold;">${escapeHtml(input.orderNumber)}</div>
-      </div>
-      <div style="padding:26px 28px;">
-        <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
-          ${row("Service", serviceText)}
-          ${row("Tapes", tapesText)}
-          ${row("Delivery", deliveryText)}
-          ${notes ? row("Notes", notes) : ""}
-        </table>
-
-        <div style="margin-top:10px;padding-top:20px;border-top:1px solid rgba(43,32,22,0.12);">
-          <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:1.5px;color:#8a7a63;text-transform:uppercase;margin-bottom:10px;">
-            Contact
-          </div>
-          <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
-            ${row("Name", contact.name)}
-            ${row("Phone", contact.phone)}
-            ${row("Email", contact.email)}
-            ${addressText ? row("Address", addressText) : ""}
-          </table>
-        </div>
-
-        <table style="width:100%;border-collapse:collapse;margin-top:22px;background:#2b2016;border-radius:10px;font-family:Arial,sans-serif;">
-          <tr>
-            <td style="padding:16px 20px;color:rgba(245,239,226,0.75);font-size:13px;">Estimated total</td>
-            <td style="padding:16px 20px;color:#f5efe2;font-size:20px;font-weight:bold;text-align:right;">$${input.grandTotal}</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>`;
+  const html = emailShell({
+    preheader: `New quote request ${input.orderNumber} from ${contact.name} - estimated $${input.grandTotal}`,
+    kicker: "New quote request",
+    title: escapeHtml(input.orderNumber),
+    body: `${rowsTable(
+      row("Service", serviceText) +
+        row("Tapes", tapesText) +
+        row("Delivery", deliveryText) +
+        (notes ? row("Notes", notes) : "")
+    )}
+${sectionBlock(
+  "Contact",
+  rowsTable(
+    row("Name", contact.name) +
+      row("Phone", contact.phone) +
+      row("Email", contact.email) +
+      (addressText ? row("Address", addressText) : "")
+  )
+)}
+${spacerRow(22)}
+${totalBox("Estimated total", `$${input.grandTotal}`)}`,
+  });
 
   await client.sendMail({
     from: `"JR Vintage Media" <${process.env.SMTP_USER}>`,
@@ -240,49 +346,33 @@ export async function sendCustomerConfirmation(
     "JR Vintage Media",
   ].filter((line): line is string => line !== null);
 
-  const html = `
-  <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
-    <div style="max-width:520px;margin:0 auto;background:#fffaf0;border-radius:14px;overflow:hidden;border:1px solid rgba(43,32,22,0.12);">
-      <div style="background:#2b2016;padding:26px 28px;">
-        <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
-          Order ${escapeHtml(input.orderNumber)}
-        </div>
-        <div style="font-family:Arial,sans-serif;color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)}. Got it.</div>
-      </div>
-      <div style="padding:26px 28px;">
-        <p style="margin:0 0 18px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          Thanks for sending through your quote request. ${escapeHtml(openingText)}
-        </p>
-        <p style="margin:0 0 20px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          Here's a copy of what you sent through, for your records:
-        </p>
-
-        <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
-          ${row("Service", serviceText)}
-          ${row("Tapes", tapesText)}
-          ${row("Delivery", deliveryText)}
-          ${notes ? row("Notes", notes) : ""}
-          ${addressText ? row("Address", addressText) : ""}
-        </table>
-
-        <table style="width:100%;border-collapse:collapse;margin-top:22px;background:#2b2016;border-radius:10px;font-family:Arial,sans-serif;">
-          <tr>
-            <td style="padding:16px 20px;color:rgba(245,239,226,0.75);font-size:13px;">
-              Estimated total<br/><span style="font-size:11px;color:rgba(245,239,226,0.55);">nothing to pay today</span>
-            </td>
-            <td style="padding:16px 20px;color:#f5efe2;font-size:20px;font-weight:bold;text-align:right;vertical-align:middle;">$${input.grandTotal}</td>
-          </tr>
-        </table>
-
-        <p style="margin:22px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          If anything's changed or you've got questions in the meantime, just reply to this email, it comes straight to me.
-        </p>
-        <p style="margin:18px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          Thanks again,<br/>Jack, JR Vintage Media
-        </p>
-      </div>
-    </div>
-  </div>`;
+  const html = emailShell({
+    preheader: `Your quote request ${input.orderNumber} - estimated total $${input.grandTotal}, nothing to pay today.`,
+    kicker: `Order ${escapeHtml(input.orderNumber)}`,
+    title: `Thanks, ${escapeHtml(firstName)}. Got it.`,
+    titleBold: false,
+    body: `${paragraph(
+      `Thanks for sending through your quote request. ${escapeHtml(openingText)}`
+    )}
+${spacerRow(16)}
+${paragraph("Here's a copy of what you sent through, for your records:")}
+${spacerRow(18)}
+${rowsTable(
+  row("Service", serviceText) +
+    row("Tapes", tapesText) +
+    row("Delivery", deliveryText) +
+    (notes ? row("Notes", notes) : "") +
+    (addressText ? row("Address", addressText) : "")
+)}
+${spacerRow(22)}
+${totalBox("Estimated total", `$${input.grandTotal}`, "nothing to pay today")}
+${spacerRow(22)}
+${paragraph(
+  "If anything's changed or you've got questions in the meantime, just reply to this email, it comes straight to me."
+)}
+${spacerRow(18)}
+${paragraph("Thanks again,<br />Jack, JR Vintage Media")}`,
+  });
 
   await client.sendMail({
     from: `"Jack at JR Vintage Media" <${process.env.SMTP_USER}>`,
@@ -333,35 +423,24 @@ export async function sendPartnerEnquiryNotification(
     `  Email: ${input.email}`,
   ].filter((line): line is string => line !== null);
 
-  const html = `
-  <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
-    <div style="max-width:520px;margin:0 auto;background:#fffaf0;border-radius:14px;overflow:hidden;border:1px solid rgba(43,32,22,0.12);">
-      <div style="background:#2b2016;padding:26px 28px;">
-        <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
-          New partner enquiry
-        </div>
-        <div style="font-family:Arial,sans-serif;color:#f5efe2;font-size:22px;font-weight:bold;">${escapeHtml(input.referenceNumber)}</div>
-      </div>
-      <div style="padding:26px 28px;">
-        <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
-          ${row("Business", input.businessName)}
-          ${input.vertical ? row("Type", input.vertical) : ""}
-          ${input.message ? row("Message", input.message) : ""}
-        </table>
-
-        <div style="margin-top:10px;padding-top:20px;border-top:1px solid rgba(43,32,22,0.12);">
-          <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:1.5px;color:#8a7a63;text-transform:uppercase;margin-bottom:10px;">
-            Contact
-          </div>
-          <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
-            ${row("Name", input.contactName)}
-            ${row("Phone", input.phone)}
-            ${row("Email", input.email)}
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>`;
+  const html = emailShell({
+    preheader: `New partner enquiry ${input.referenceNumber} from ${input.businessName}`,
+    kicker: "New partner enquiry",
+    title: escapeHtml(input.referenceNumber),
+    body: `${rowsTable(
+      row("Business", input.businessName) +
+        (input.vertical ? row("Type", input.vertical) : "") +
+        (input.message ? row("Message", input.message) : "")
+    )}
+${sectionBlock(
+  "Contact",
+  rowsTable(
+    row("Name", input.contactName) +
+      row("Phone", input.phone) +
+      row("Email", input.email)
+  )
+)}`,
+  });
 
   await client.sendMail({
     from: `"JR Vintage Media" <${process.env.SMTP_USER}>`,
@@ -408,35 +487,29 @@ export async function sendPartnerEnquiryConfirmation(
     "JR Vintage Media",
   ].filter((line): line is string => line !== null);
 
-  const html = `
-  <div style="background:#f5efe2;padding:32px 16px;font-family:Georgia,'Times New Roman',serif;">
-    <div style="max-width:520px;margin:0 auto;background:#fffaf0;border-radius:14px;overflow:hidden;border:1px solid rgba(43,32,22,0.12);">
-      <div style="background:#2b2016;padding:26px 28px;">
-        <div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:#d9a15a;text-transform:uppercase;margin-bottom:8px;">
-          Reference ${escapeHtml(input.referenceNumber)}
-        </div>
-        <div style="font-family:Arial,sans-serif;color:#f5efe2;font-size:20px;">Thanks, ${escapeHtml(firstName)}. Got it.</div>
-      </div>
-      <div style="padding:26px 28px;">
-        <p style="margin:0 0 20px;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          Thanks for your interest in partnering with JR Vintage Media. I'll be in touch shortly to talk through how it could work for ${escapeHtml(input.businessName)}.
-        </p>
-
-        <table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;">
-          ${row("Business", input.businessName)}
-          ${input.vertical ? row("Type", input.vertical) : ""}
-          ${input.message ? row("Message", input.message) : ""}
-        </table>
-
-        <p style="margin:22px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          If there's anything you'd like to add before then, just reply to this email, it comes straight to me.
-        </p>
-        <p style="margin:18px 0 0;color:#2b2016;font-size:14px;line-height:1.6;font-family:Arial,sans-serif;">
-          Thanks again,<br/>Jack, JR Vintage Media
-        </p>
-      </div>
-    </div>
-  </div>`;
+  const html = emailShell({
+    preheader: "Thanks for your interest in partnering with JR Vintage Media.",
+    kicker: `Reference ${escapeHtml(input.referenceNumber)}`,
+    title: `Thanks, ${escapeHtml(firstName)}. Got it.`,
+    titleBold: false,
+    body: `${paragraph(
+      `Thanks for your interest in partnering with JR Vintage Media. I'll be in touch shortly to talk through how it could work for ${escapeHtml(
+        input.businessName
+      )}.`
+    )}
+${spacerRow(20)}
+${rowsTable(
+  row("Business", input.businessName) +
+    (input.vertical ? row("Type", input.vertical) : "") +
+    (input.message ? row("Message", input.message) : "")
+)}
+${spacerRow(22)}
+${paragraph(
+  "If there's anything you'd like to add before then, just reply to this email, it comes straight to me."
+)}
+${spacerRow(18)}
+${paragraph("Thanks again,<br />Jack, JR Vintage Media")}`,
+  });
 
   await client.sendMail({
     from: `"Jack at JR Vintage Media" <${process.env.SMTP_USER}>`,
