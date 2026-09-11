@@ -293,6 +293,24 @@ export const reviewData: ReviewEntry[] = [
     rating: 5,
     source: "google",
   },
+  {
+    name: "Michael",
+    text: "Excellent service from this company. Multiple hours of footage transferred for our family so our happy memories are preserved for ever.",
+    rating: 5,
+    source: "google",
+  },
+  {
+    name: "Jeff",
+    text: "Very satisfied with the results Jack was able to achieve - especially given some of the VHS tapes were almost 40yrs old! Jack was easy to deal with, good communicator and kept me updated regarding progress (I provided a number of tapes). I would highly recommend him.",
+    rating: 5,
+    source: "google",
+  },
+  {
+    name: "Kenny",
+    text: "I had 3 tapes done and transferred to a memory stick. I am happy with the result. Timely turnaround as well.",
+    rating: 5,
+    source: "google",
+  },
 ];
 
 export const disclaimerText =
