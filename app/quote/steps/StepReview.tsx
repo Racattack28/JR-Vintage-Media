@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { disclaimerText } from "@/lib/data";
 
 interface StepReviewProps {
@@ -10,6 +11,8 @@ interface StepReviewProps {
   email: string;
   notes: string;
   grandTotal: number;
+  consent: boolean;
+  onConsentChange: (value: boolean) => void;
 }
 
 export default function StepReview({
@@ -22,6 +25,8 @@ export default function StepReview({
   email,
   notes,
   grandTotal,
+  consent,
+  onConsentChange,
 }: StepReviewProps) {
   return (
     <div className="jr-fade-up">
@@ -88,6 +93,26 @@ export default function StepReview({
       <p className="text-[12.5px] leading-[1.6] text-[rgba(43,32,22,0.5)] mt-4 mb-0">
         <strong>Disclaimer:</strong> {disclaimerText}
       </p>
+
+      <label className="flex items-start gap-3 mt-6 cursor-pointer select-none">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => onConsentChange(e.target.checked)}
+          className="mt-[3px] w-[16px] h-[16px] shrink-0 accent-[#bf4e2a] cursor-pointer"
+        />
+        <span className="text-[13.5px] leading-[1.6] text-[rgba(43,32,22,0.75)]">
+          I agree to the{" "}
+          <Link href="/privacy" target="_blank" className="jr-link">
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link href="/terms" target="_blank" className="jr-link">
+            Terms and Conditions
+          </Link>
+          .
+        </span>
+      </label>
     </div>
   );
 }

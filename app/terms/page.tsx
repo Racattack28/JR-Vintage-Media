@@ -25,7 +25,7 @@ export default function TermsPage() {
           Terms and Conditions
         </h1>
         <p className="text-[13px] text-[rgba(43,32,22,0.5)] m-0 mb-8">
-          Last updated: July 23, 2026
+          Last updated: September 11, 2026
         </p>
 
         <p className={pClass}>
@@ -102,12 +102,34 @@ export default function TermsPage() {
           files as soon as you receive them.
         </p>
 
-        <h2 className={h2Class}>7. Cancellations</h2>
+        <h2 className={h2Class}>7. Cancellations and refunds</h2>
         <p className={pClass}>
           If you&apos;d like to cancel an order, contact us as soon as
-          possible. Once conversion work has begun, we may not be able to
-          offer a full refund, as our time and equipment use to that point
-          cannot be recovered.
+          possible.
+        </p>
+        <ul className="m-0 mb-4 pl-[18px] flex flex-col gap-2">
+          <li className="text-[15px] leading-[1.75] text-[rgba(43,32,22,0.75)]">
+            If no tapes have been converted yet, you&apos;ll receive a full
+            refund of any payment made.
+          </li>
+          <li className="text-[15px] leading-[1.75] text-[rgba(43,32,22,0.75)]">
+            If some tapes have already been converted, you&apos;ll be charged
+            only for the tapes completed at that point (at the per-tape rate
+            for your order), with the remainder refunded. Your tapes and any
+            completed files will be returned to you.
+          </li>
+          <li className="text-[15px] leading-[1.75] text-[rgba(43,32,22,0.75)]">
+            If a tape can&apos;t be converted due to a fault on our end (for
+            example, an error on our equipment), you won&apos;t be charged
+            for that tape. We&apos;re not able to refund the per-tape fee
+            where a tape fails to convert due to its own age, damage, or
+            condition, as explained above.
+          </li>
+        </ul>
+        <p className={pClass}>
+          Nothing in this section limits any consumer guarantee you have
+          under the Australian Consumer Law, including the right to a refund,
+          repair, or replacement where our service has a major failure.
         </p>
 
         <h2 className={h2Class}>8. Ownership and copyright</h2>

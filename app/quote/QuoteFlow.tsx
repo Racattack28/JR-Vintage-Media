@@ -168,6 +168,8 @@ export default function QuoteFlow() {
             email={state.email}
             notes={state.notes}
             grandTotal={totals.grandTotal}
+            consent={state.consent}
+            onConsentChange={(v) => update("consent", v)}
           />
         )}
 
@@ -192,8 +194,8 @@ export default function QuoteFlow() {
             <button
               type="button"
               onClick={submitOrder}
-              disabled={submitting}
-              className="font-[family-name:var(--font-lato)] font-bold text-[15px] bg-[#bf4e2a] text-[#fffaf0] border-none py-[14px] px-[30px] rounded-[30px] cursor-pointer disabled:opacity-60"
+              disabled={submitting || !valid}
+              className="font-[family-name:var(--font-lato)] font-bold text-[15px] bg-[#bf4e2a] text-[#fffaf0] border-none py-[14px] px-[30px] rounded-[30px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {submitting ? "Submitting…" : "Submit request"}
             </button>

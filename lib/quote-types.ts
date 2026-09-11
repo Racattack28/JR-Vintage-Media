@@ -17,6 +17,7 @@ export interface QuoteState {
   state: string;
   zip: string;
   notes: string;
+  consent: boolean;
 }
 
 export const initialQuoteState: QuoteState = {
@@ -33,6 +34,7 @@ export const initialQuoteState: QuoteState = {
   state: "",
   zip: "",
   notes: "",
+  consent: false,
 };
 
 export function isStepValid(step: number, state: QuoteState): boolean {
@@ -56,7 +58,7 @@ export function isStepValid(step: number, state: QuoteState): boolean {
             state.zip.trim()))
       );
     case 4:
-      return true;
+      return state.consent;
     default:
       return true;
   }

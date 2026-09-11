@@ -26,7 +26,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="text-[13px] text-[rgba(43,32,22,0.5)] m-0 mb-8">
-          Last updated: July 23, 2026
+          Last updated: September 11, 2026
         </p>
 
         <p className={pClass}>
@@ -66,7 +66,15 @@ export default function PrivacyPage() {
           We do not use your information for marketing unless you&apos;ve
           separately opted in, and we do not sell or share your personal
           information with third parties, other than where necessary to
-          complete your order (for example, a courier or postage provider).
+          complete your order (for example, a courier, postage provider, or
+          our email hosting provider used to send order communications).
+        </p>
+
+        <h2 className={h2Class}>Cookies and tracking</h2>
+        <p className={pClass}>
+          This website does not use cookies, analytics, or any advertising or
+          tracking scripts. We don&apos;t track your browsing activity on
+          this site or share it with anyone.
         </p>
 
         <h2 className={h2Class}>Storage and security</h2>

@@ -22,9 +22,14 @@ export default function PartnerEnquiryForm({ initialVertical }: PartnerEnquiryFo
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [referenceNumber, setReferenceNumber] = useState<string | null>(null);
+  const [consent, setConsent] = useState(false);
 
   const valid =
-    businessName.trim() && contactName.trim() && isValidEmail(email) && phone.trim();
+    businessName.trim() &&
+    contactName.trim() &&
+    isValidEmail(email) &&
+    phone.trim() &&
+    consent;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -158,6 +163,26 @@ export default function PartnerEnquiryForm({ initialVertical }: PartnerEnquiryFo
           className={`${inputClass} resize-none`}
         />
       </div>
+
+      <label className="flex items-start gap-3 mt-6 cursor-pointer select-none">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          className="mt-[3px] w-[16px] h-[16px] shrink-0 accent-[#bf4e2a] cursor-pointer"
+        />
+        <span className="text-[13.5px] leading-[1.6] text-[rgba(43,32,22,0.75)]">
+          I agree to the{" "}
+          <Link href="/privacy" target="_blank" className="jr-link">
+            Privacy Policy
+          </Link>{" "}
+          and{" "}
+          <Link href="/terms" target="_blank" className="jr-link">
+            Terms and Conditions
+          </Link>
+          .
+        </span>
+      </label>
 
       {error && <p className="text-[13px] text-[#bf4e2a] mt-4 mb-0">{error}</p>}
 
