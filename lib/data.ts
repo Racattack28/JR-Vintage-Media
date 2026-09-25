@@ -211,7 +211,7 @@ export const faqData: FaqEntry[] = [
   {
     cat: "Process & timing",
     q: "How do I send you my tapes?",
-    a: "Pack them snugly in a sturdy box with some padding so they can't shift around in transit, and post them to me. Once your order arrives, I'll email you to confirm it's here safely. Prefer to skip the post? Local drop-off works too.",
+    a: "Pack them snugly in a sturdy box with some padding so they can't shift around in transit, and post them to me. I'd recommend sending them tracked and hanging on to your tracking number until I've confirmed they've arrived. Once your order arrives, I'll email you to confirm it's here safely. Prefer to skip the post? Local drop-off works too.",
   },
   {
     cat: "Process & timing",
