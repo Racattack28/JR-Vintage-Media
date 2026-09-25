@@ -5,6 +5,8 @@ interface StepReviewProps {
   serviceLabel: string;
   totalTapes: number;
   tapeSubtotal: number;
+  dvdCount: number;
+  dvdSubtotal: number;
   longSummary: string;
   deliverySummary: string;
   name: string;
@@ -19,6 +21,8 @@ export default function StepReview({
   serviceLabel,
   totalTapes,
   tapeSubtotal,
+  dvdCount,
+  dvdSubtotal,
   longSummary,
   deliverySummary,
   name,
@@ -42,18 +46,28 @@ export default function StepReview({
           <div className="text-[rgba(43,32,22,0.6)] text-[14px]">Service</div>
           <div className="font-semibold text-[14px]">{serviceLabel}</div>
         </div>
-        <div className="flex justify-between py-[18px] px-6 border-b border-[rgba(43,32,22,0.12)]">
-          <div className="text-[rgba(43,32,22,0.6)] text-[14px]">Tapes</div>
-          <div className="font-semibold text-[14px] text-right">
-            {totalTapes} {totalTapes === 1 ? "tape" : "tapes"}, ${tapeSubtotal}
-            {longSummary && (
-              <>
-                <br />
-                {longSummary}
-              </>
-            )}
+        {(totalTapes > 0 || longSummary) && (
+          <div className="flex justify-between py-[18px] px-6 border-b border-[rgba(43,32,22,0.12)]">
+            <div className="text-[rgba(43,32,22,0.6)] text-[14px]">Tapes</div>
+            <div className="font-semibold text-[14px] text-right">
+              {totalTapes} {totalTapes === 1 ? "tape" : "tapes"}, ${tapeSubtotal}
+              {longSummary && (
+                <>
+                  <br />
+                  {longSummary}
+                </>
+              )}
+            </div>
           </div>
-        </div>
+        )}
+        {dvdCount > 0 && (
+          <div className="flex justify-between py-[18px] px-6 border-b border-[rgba(43,32,22,0.12)]">
+            <div className="text-[rgba(43,32,22,0.6)] text-[14px]">DVDs</div>
+            <div className="font-semibold text-[14px] text-right">
+              {dvdCount} {dvdCount === 1 ? "DVD" : "DVDs"}, ${dvdSubtotal}
+            </div>
+          </div>
+        )}
         <div className="flex justify-between py-[18px] px-6 border-b border-[rgba(43,32,22,0.12)]">
           <div className="text-[rgba(43,32,22,0.6)] text-[14px] shrink-0 mr-4">
             Delivery

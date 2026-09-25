@@ -3,7 +3,7 @@ import Reveal from "@/components/Reveal";
 const items = [
   "FREE TAPE CLEANING & REPAIR",
   "LOCAL DROP-OFF OR MAIL-IN",
-  "VHS · VHS-C · Hi8 & Video8 · MiniDV · Other",
+  "VHS · VHS-C · Hi8 & Video8 · MiniDV · DVD · Other",
   "USB, HARD DRIVE, YOUTUBE, OR DRIVE",
   "5.0★ RATED ON GOOGLE REVIEWS",
   "SERVICING MOOLOOLABA & THE SUNSHINE COAST",

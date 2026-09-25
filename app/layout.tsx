@@ -31,7 +31,7 @@ const lato = Lato({
 });
 
 const description =
-  "JR Vintage Media converts VHS, VHS-C, S-VHS, Video8, Hi8, Digital8 and MiniDV tapes to digital files. Local drop-off in Mooloolaba, Sunshine Coast, or mail-in from anywhere in Australia. Free tape cleaning and repair, simple per-tape pricing.";
+  "JR Vintage Media converts VHS, VHS-C, S-VHS, Video8, Hi8, Digital8 and MiniDV tapes and DVDs to digital files. Local drop-off in Mooloolaba, Sunshine Coast, or mail-in from anywhere in Australia. Free tape cleaning and repair, simple per-tape pricing.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

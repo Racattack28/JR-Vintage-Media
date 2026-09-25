@@ -72,6 +72,19 @@ export default function Pricing() {
           </div>
         </div>
 
+        <div className="flex items-center justify-between bg-[#3a2c1c] border border-[rgba(245,239,226,0.15)] rounded-2xl py-[26px] px-8 flex-wrap gap-4 mb-4">
+          <div>
+            <div className="font-semibold text-[16px] mb-1">DVDs</div>
+            <div className="text-[14px] text-[rgba(245,239,226,0.65)]">
+              Home-recorded discs, converted to digital files and sent in
+              the same order as your tapes
+            </div>
+          </div>
+          <div className="font-[family-name:var(--font-barlow)] text-[13px] text-[#d9a15a]">
+            $15 PER DVD
+          </div>
+        </div>
+
         <div className="flex items-center justify-between bg-[#3a2c1c] border border-[rgba(245,239,226,0.15)] rounded-2xl py-[26px] px-8 flex-wrap gap-4">
           <div>
             <div className="font-semibold text-[16px] mb-1">

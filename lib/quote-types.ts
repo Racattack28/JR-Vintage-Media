@@ -6,6 +6,7 @@ export type ServiceType = "local" | "mail" | null;
 export interface QuoteState {
   serviceType: ServiceType;
   vhsCount: number;
+  dvdCount: number;
   longMedCount: number;
   longMaxCount: number;
   deliveryMethod: DeliveryMethod;
@@ -23,6 +24,7 @@ export interface QuoteState {
 export const initialQuoteState: QuoteState = {
   serviceType: null,
   vhsCount: 1,
+  dvdCount: 0,
   longMedCount: 0,
   longMaxCount: 0,
   deliveryMethod: "usb",
@@ -43,7 +45,7 @@ export function isStepValid(step: number, state: QuoteState): boolean {
     case 0:
       return !!state.serviceType;
     case 1:
-      return state.vhsCount > 0;
+      return state.vhsCount + state.dvdCount > 0;
     case 2:
       return true;
     case 3:

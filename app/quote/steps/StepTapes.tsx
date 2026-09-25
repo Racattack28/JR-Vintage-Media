@@ -1,10 +1,15 @@
+import { DVD_PRICE } from "@/lib/pricing";
+
 interface StepTapesProps {
   vhsCount: number;
+  dvdCount: number;
   longMedCount: number;
   longMaxCount: number;
   pricePerTape: number;
   tapeSubtotal: number;
+  dvdSubtotal: number;
   onVhsChange: (value: number) => void;
+  onDvdChange: (value: number) => void;
   onLongMedChange: (value: number) => void;
   onLongMaxChange: (value: number) => void;
 }
@@ -32,22 +37,27 @@ function CounterButton({
 
 export default function StepTapes({
   vhsCount,
+  dvdCount,
   longMedCount,
   longMaxCount,
   pricePerTape,
   tapeSubtotal,
+  dvdSubtotal,
   onVhsChange,
+  onDvdChange,
   onLongMedChange,
   onLongMaxChange,
 }: StepTapesProps) {
+  const showTapeLine = vhsCount > 0 || dvdCount === 0;
+
   return (
     <div className="jr-fade-up">
       <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[32px] m-0 mb-2">
-        How many tapes are you sending?
+        What are you sending?
       </h2>
       <p className="text-[15px] text-[rgba(43,32,22,0.65)] m-0 mb-8">
-        Standard play, up to 2 hours each. Pricing drops automatically at 6
-        and 11 tapes.
+        Tapes are standard play, up to 2 hours each, and pricing drops
+        automatically at 6 and 11 tapes. DVDs are a flat ${DVD_PRICE} each.
       </p>
 
       <div className="flex flex-col gap-4 mb-7">
@@ -70,15 +80,46 @@ export default function StepTapes({
             <CounterButton onClick={() => onVhsChange(vhsCount + 1)}>+</CounterButton>
           </div>
         </div>
+        <div className="flex items-center justify-between border border-[rgba(43,32,22,0.16)] rounded-[14px] py-5 px-6 bg-[#fffaf0]">
+          <div>
+            <div className="font-semibold text-[16px]">DVDs</div>
+            <div className="text-[13px] text-[rgba(43,32,22,0.55)]">
+              Home-recorded discs, ${DVD_PRICE} each
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <CounterButton onClick={() => onDvdChange(Math.max(0, dvdCount - 1))}>
+              &minus;
+            </CounterButton>
+            <div className="font-[family-name:var(--font-barlow)] text-[18px] w-6 text-center">
+              {dvdCount}
+            </div>
+            <CounterButton onClick={() => onDvdChange(dvdCount + 1)}>+</CounterButton>
+          </div>
+        </div>
       </div>
 
-      <div className="flex items-center justify-between bg-[#2b2016] text-[#f5efe2] rounded-[14px] py-5 px-6">
-        <div className="text-[14px]">
-          {vhsCount} {vhsCount === 1 ? "tape" : "tapes"} &times; ${pricePerTape} each
-        </div>
-        <div className="font-[family-name:var(--font-barlow)] text-[19px]">
-          ${tapeSubtotal}
-        </div>
+      <div className="bg-[#2b2016] text-[#f5efe2] rounded-[14px] py-5 px-6 flex flex-col gap-2">
+        {showTapeLine && (
+          <div className="flex items-center justify-between">
+            <div className="text-[14px]">
+              {vhsCount} {vhsCount === 1 ? "tape" : "tapes"} &times; ${pricePerTape} each
+            </div>
+            <div className="font-[family-name:var(--font-barlow)] text-[19px]">
+              ${tapeSubtotal}
+            </div>
+          </div>
+        )}
+        {dvdCount > 0 && (
+          <div className="flex items-center justify-between">
+            <div className="text-[14px]">
+              {dvdCount} {dvdCount === 1 ? "DVD" : "DVDs"} &times; ${DVD_PRICE} each
+            </div>
+            <div className="font-[family-name:var(--font-barlow)] text-[19px]">
+              ${dvdSubtotal}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="mt-5">

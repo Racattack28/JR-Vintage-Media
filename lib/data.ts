@@ -3,6 +3,7 @@ export type FormatSlug =
   | "vhs-c"
   | "hi8-video8"
   | "minidv"
+  | "dvd"
   | "other";
 
 export interface FormatEntry {
@@ -11,6 +12,7 @@ export interface FormatEntry {
   placeholder: string;
   image: string;
   description: string;
+  metaTitle?: string;
 }
 
 export const formatData: Record<FormatSlug, FormatEntry> = {
@@ -46,6 +48,15 @@ export const formatData: Record<FormatSlug, FormatEntry> = {
     description:
       "MiniDV was the dominant digital camcorder tape format through the 2000s, known for sharp, stable picture quality. While the digital recording holds up well, the tapes and the decks that play them are aging, so transferring now protects the footage against a mechanical failure down the line.",
   },
+  dvd: {
+    slug: "dvd",
+    title: "DVD",
+    metaTitle: "DVD to digital conversion",
+    placeholder: "A pile of DVDs catching the light",
+    image: "/formats/dvd.jpg",
+    description:
+      "Home-recorded DVDs were how a lot of families saved their videos through the 2000s, whether burned on a DVD recorder or made from an earlier tape transfer. Burned discs don't last as long as most people expect, though. The recording layer slowly breaks down with age, scratches and disc rot can make a disc skip or stop playing altogether, and fewer computers and TVs come with a DVD drive each year. I copy the video off each disc into a digital file you can watch on any phone, computer or TV, and back up so your memories aren't relying on a single disc anymore.",
+  },
   other: {
     slug: "other",
     title: "Something else",
@@ -63,6 +74,7 @@ export const formatNavItems: { slug: FormatSlug; label: string }[] = [
   { slug: "vhs-c", label: "VHS-C" },
   { slug: "hi8-video8", label: "Hi8 & Video8" },
   { slug: "minidv", label: "MiniDV" },
+  { slug: "dvd", label: "DVD" },
   { slug: "other", label: "Other" },
 ];
 
@@ -175,8 +187,13 @@ export interface FaqEntry {
 export const faqData: FaqEntry[] = [
   {
     cat: "Tapes & formats",
-    q: "What types of tapes can you convert?",
-    a: "VHS makes up most of what comes through the door, but the other common home video formats are covered too, including S-VHS, VHS-C, Hi8, Video8, Digital8 and MiniDV. If your tape isn't listed here, get in touch with a photo of it and I'll let you know whether it's something I can handle.",
+    q: "What types of tapes and discs can you convert?",
+    a: "VHS makes up most of what comes through the door, but the other common home video formats are covered too, including S-VHS, VHS-C, Hi8, Video8, Digital8 and MiniDV, plus home-recorded DVDs. If yours isn't listed here, get in touch with a photo of it and I'll let you know whether it's something I can handle.",
+  },
+  {
+    cat: "Tapes & formats",
+    q: "Do you convert DVDs?",
+    a: "Yes. Home-recorded DVDs are a flat $15 per disc, and they can go in the same order as your tapes. I copy the video off each disc into a digital file, delivered the same way as any tape transfer.",
   },
   {
     cat: "Tapes & formats",
@@ -186,7 +203,7 @@ export const faqData: FaqEntry[] = [
   {
     cat: "Tapes & formats",
     q: "Can I mix VHS and other tape types in one order?",
-    a: "Yes. I work with VHS, VHS-C, MiniDV, and Hi8 camcorder tapes, and pricing is based on the total number of tapes across all of these formats.",
+    a: "Yes. I work with VHS, VHS-C, MiniDV, and Hi8 camcorder tapes, and pricing is based on the total number of tapes across all of these formats. DVDs can go in the same order too, at a flat $15 per disc.",
   },
   {
     cat: "Tapes & formats",
@@ -356,4 +373,4 @@ export const deliveryCatalog: DeliveryCatalogEntry[] = [
   },
 ];
 
-export const stepLabels = ["Service", "Tapes", "Storage", "Details", "Review"];
+export const stepLabels = ["Service", "Tapes & DVDs", "Storage", "Details", "Review"];

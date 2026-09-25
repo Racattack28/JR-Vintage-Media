@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/components/Header";
-import { computeQuoteTotals } from "@/lib/pricing";
+import { computeQuoteTotals, DVD_PRICE, itemsNoun } from "@/lib/pricing";
 import { deliveryCatalog } from "@/lib/data";
 import { initialQuoteState, isStepValid, type QuoteState } from "@/lib/quote-types";
 import Stepper from "./Stepper";
@@ -71,6 +71,11 @@ export default function QuoteFlow() {
             longMaxCount: state.longMaxCount,
             longSurcharge: totals.longSurcharge,
           },
+          dvds: {
+            count: state.dvdCount,
+            pricePerDvd: DVD_PRICE,
+            subtotal: totals.dvdSubtotal,
+          },
           delivery: {
             method: state.deliveryMethod,
             sizeLabel:
@@ -120,6 +125,7 @@ export default function QuoteFlow() {
             email={state.email}
             grandTotal={totals.grandTotal}
             isMail={isMail}
+            itemsNoun={itemsNoun(state.vhsCount, state.dvdCount)}
           />
         </div>
       </div>
@@ -141,11 +147,14 @@ export default function QuoteFlow() {
         {step === 1 && (
           <StepTapes
             vhsCount={state.vhsCount}
+            dvdCount={state.dvdCount}
             longMedCount={state.longMedCount}
             longMaxCount={state.longMaxCount}
             pricePerTape={totals.pricePerTape}
             tapeSubtotal={totals.tapeSubtotal}
+            dvdSubtotal={totals.dvdSubtotal}
             onVhsChange={(v) => update("vhsCount", v)}
+            onDvdChange={(v) => update("dvdCount", v)}
             onLongMedChange={(v) => update("longMedCount", v)}
             onLongMaxChange={(v) => update("longMaxCount", v)}
           />
@@ -162,6 +171,8 @@ export default function QuoteFlow() {
             serviceLabel={serviceLabel}
             totalTapes={totals.totalTapes}
             tapeSubtotal={totals.tapeSubtotal}
+            dvdCount={state.dvdCount}
+            dvdSubtotal={totals.dvdSubtotal}
             longSummary={longSummary}
             deliverySummary={deliverySummary}
             name={state.name}

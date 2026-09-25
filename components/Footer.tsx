@@ -66,7 +66,7 @@ export default function Footer({
             </div>
 
             <div>
-              <div className={columnHeadingClass}>TAPE FORMATS</div>
+              <div className={columnHeadingClass}>WHAT I CONVERT</div>
               <nav className="flex flex-col gap-3">
                 {formatNavItems.map((item) => (
                   <Link

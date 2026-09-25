@@ -22,19 +22,20 @@ export default function TermsPage() {
           Terms and Conditions
         </h1>
         <p className="text-[13px] text-[rgba(43,32,22,0.5)] m-0 mb-8">
-          Last updated: September 11, 2026
+          Last updated: September 25, 2026
         </p>
 
         <p className={pClass}>
           These terms apply whenever you send tapes to JR Vintage Media
           (&quot;we&quot;, &quot;us&quot;) for conversion to digital format. By
-          posting your tapes to us, you agree to these terms.
+          posting your tapes to us, you agree to these terms. In these
+          terms, &quot;tapes&quot; includes any DVDs you send us.
         </p>
 
         <h2 className={h2Class}>1. The service</h2>
         <p className={pClass}>
           We convert VHS, VHS-C, S-VHS, Video8, Hi8, Digital8 and MiniDV
-          tapes to digital files. Every order is watched and logged by hand
+          tapes, as well as home-recorded DVDs, to digital files. Every order is watched and logged by hand
           on our own decks.
         </p>
         <p className={pClass}>

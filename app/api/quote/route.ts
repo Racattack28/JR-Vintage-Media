@@ -12,6 +12,11 @@ interface QuoteRequestBody {
     longMaxCount: number;
     longSurcharge: number;
   };
+  dvds?: {
+    count: number;
+    pricePerDvd: number;
+    subtotal: number;
+  };
   delivery: {
     method: string;
     sizeLabel: string | null;

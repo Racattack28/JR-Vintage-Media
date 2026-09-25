@@ -6,6 +6,7 @@ interface ConfirmationProps {
   email: string;
   grandTotal: number;
   isMail: boolean;
+  itemsNoun: string;
 }
 
 export default function Confirmation({
@@ -14,10 +15,11 @@ export default function Confirmation({
   email,
   grandTotal,
   isMail,
+  itemsNoun,
 }: ConfirmationProps) {
   const confirmationText = isMail
-    ? "Pack your tapes securely and mail them in. Include your name and order number inside the box."
-    : "Bring your tapes by for drop-off whenever works for you.";
+    ? `Pack your ${itemsNoun} securely and mail them in. Include your name and order number inside the box.`
+    : `Bring your ${itemsNoun} by for drop-off whenever works for you.`;
 
   return (
     <div className="text-center py-16 px-5" style={{ animation: "jr-fade-up 0.5s ease both" }}>

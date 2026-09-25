@@ -20,7 +20,7 @@ export async function generateMetadata({
   const entry = formatData[slug as FormatSlug];
   if (!entry) return {};
   return buildMetadata({
-    title: `${entry.title} tape transfer | JR Vintage Media`,
+    title: `${entry.metaTitle ?? `${entry.title} tape transfer`} | JR Vintage Media`,
     description: entry.description,
     path: `/formats/${slug}`,
   });

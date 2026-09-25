@@ -5,7 +5,7 @@ import QuoteFlow from "./QuoteFlow";
 export const metadata: Metadata = buildMetadata({
   title: "Get a free quote | JR Vintage Media",
   description:
-    "Get a free quote to convert your VHS, VHS-C, S-VHS, Video8, Hi8, Digital8 or MiniDV tapes to digital files.",
+    "Get a free quote to convert your VHS, VHS-C, S-VHS, Video8, Hi8, Digital8 or MiniDV tapes and home-recorded DVDs to digital files.",
   path: "/quote",
 });
 

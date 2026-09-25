@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { itemsNoun as itemsNounFor } from "./pricing";
 
 let transporter: ReturnType<typeof nodemailer.createTransport> | null = null;
 
@@ -34,6 +35,11 @@ export interface QuoteNotificationInput {
     longMedCount: number;
     longMaxCount: number;
     longSurcharge: number;
+  };
+  dvds?: {
+    count: number;
+    pricePerDvd: number;
+    subtotal: number;
   };
   delivery: {
     method: string;
@@ -210,11 +216,22 @@ function buildSummary(input: QuoteNotificationInput) {
 
   const serviceText = input.serviceType === "mail" ? "Mail-in" : "Local drop-off";
 
+  const dvdCount = input.dvds?.count ?? 0;
+
   const tapesText =
-    `${tapes.count} tape${tapes.count === 1 ? "" : "s"} x $${tapes.pricePerTape} = $${tapes.subtotal}` +
-    (tapes.longSurcharge > 0
-      ? ` (+$${tapes.longSurcharge} long-recording surcharge: ${tapes.longMedCount} x 2-4hr, ${tapes.longMaxCount} x 4-6hr)`
-      : "");
+    tapes.count > 0 || tapes.longSurcharge > 0 || dvdCount === 0
+      ? `${tapes.count} tape${tapes.count === 1 ? "" : "s"} x $${tapes.pricePerTape} = $${tapes.subtotal}` +
+        (tapes.longSurcharge > 0
+          ? ` (+$${tapes.longSurcharge} long-recording surcharge: ${tapes.longMedCount} x 2-4hr, ${tapes.longMaxCount} x 4-6hr)`
+          : "")
+      : null;
+
+  const dvdsText =
+    input.dvds && dvdCount > 0
+      ? `${dvdCount} DVD${dvdCount === 1 ? "" : "s"} x $${input.dvds.pricePerDvd} = $${input.dvds.subtotal}`
+      : null;
+
+  const itemsNoun = itemsNounFor(tapes.count, dvdCount);
 
   const deliveryLabel = DELIVERY_LABELS[delivery.method] ?? delivery.method;
   const deliveryText =
@@ -229,7 +246,7 @@ function buildSummary(input: QuoteNotificationInput) {
           .join(", ")
       : null;
 
-  return { serviceText, tapesText, deliveryText, addressText };
+  return { serviceText, tapesText, dvdsText, itemsNoun, deliveryText, addressText };
 }
 
 export async function sendQuoteNotification(
@@ -247,13 +264,14 @@ export async function sendQuoteNotification(
 
   const notifyTo = process.env.QUOTE_NOTIFICATION_EMAIL || process.env.SMTP_USER!;
   const { contact, notes } = input;
-  const { serviceText, tapesText, deliveryText, addressText } = buildSummary(input);
+  const { serviceText, tapesText, dvdsText, deliveryText, addressText } = buildSummary(input);
 
   const textLines = [
     `New quote request ${input.orderNumber}`,
     "",
     `Service:  ${serviceText}`,
-    `Tapes:    ${tapesText}`,
+    tapesText ? `Tapes:    ${tapesText}` : null,
+    dvdsText ? `DVDs:     ${dvdsText}` : null,
     `Delivery: ${deliveryText}`,
     notes ? `Notes:    ${notes}` : null,
     "",
@@ -272,7 +290,8 @@ export async function sendQuoteNotification(
     title: escapeHtml(input.orderNumber),
     body: `${rowsTable(
       row("Service", serviceText) +
-        row("Tapes", tapesText) +
+        (tapesText ? row("Tapes", tapesText) : "") +
+        (dvdsText ? row("DVDs", dvdsText) : "") +
         row("Delivery", deliveryText) +
         (notes ? row("Notes", notes) : "")
     )}
@@ -315,13 +334,14 @@ export async function sendCustomerConfirmation(
   }
 
   const { contact, notes } = input;
-  const { serviceText, tapesText, deliveryText, addressText } = buildSummary(input);
+  const { serviceText, tapesText, dvdsText, itemsNoun, deliveryText, addressText } =
+    buildSummary(input);
   const firstName = contact.name.trim().split(/\s+/)[0] || contact.name;
 
   const openingText =
     input.serviceType === "mail"
-      ? "I'll be in touch shortly to confirm everything. In the meantime, pack your tapes securely (a sturdy box with a bit of padding so they can't shift around) and post them through when you're ready."
-      : "I'll be in touch shortly to confirm everything and organise a time for you to drop your tapes by.";
+      ? `I'll be in touch shortly to confirm everything. In the meantime, pack your ${itemsNoun} securely (a sturdy box with a bit of padding so they can't shift around) and post them through when you're ready.`
+      : `I'll be in touch shortly to confirm everything and organise a time for you to drop your ${itemsNoun} by.`;
 
   const textLines = [
     `Hi ${firstName},`,
@@ -332,7 +352,8 @@ export async function sendCustomerConfirmation(
     "",
     `Order: ${input.orderNumber}`,
     `Service:  ${serviceText}`,
-    `Tapes:    ${tapesText}`,
+    tapesText ? `Tapes:    ${tapesText}` : null,
+    dvdsText ? `DVDs:     ${dvdsText}` : null,
     `Delivery: ${deliveryText}`,
     notes ? `Notes:    ${notes}` : null,
     addressText ? `Address:  ${addressText}` : null,
@@ -359,7 +380,8 @@ ${paragraph("Here's a copy of what you sent through, for your records:")}
 ${spacerRow(18)}
 ${rowsTable(
   row("Service", serviceText) +
-    row("Tapes", tapesText) +
+    (tapesText ? row("Tapes", tapesText) : "") +
+    (dvdsText ? row("DVDs", dvdsText) : "") +
     row("Delivery", deliveryText) +
     (notes ? row("Notes", notes) : "") +
     (addressText ? row("Address", addressText) : "")
