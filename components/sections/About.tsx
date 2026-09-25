@@ -24,7 +24,7 @@ export default function About() {
         </TiltCard>
         <div>
           <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[36px] m-0 mb-[18px]">
-            Hi, I&apos;m Jack Racovalis.
+            Hi, I&apos;m Jack.
           </h2>
           <p className="text-[16px] leading-[1.75] text-[rgba(43,32,22,0.75)] m-0 mb-4 max-w-[560px]">
             I founded JR Vintage Media as I found genuine interest in
