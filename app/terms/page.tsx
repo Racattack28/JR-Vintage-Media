@@ -18,9 +18,6 @@ export default function TermsPage() {
     <div className="min-h-screen bg-[#f5efe2] font-[family-name:var(--font-lato)] text-[#2b2016]">
       <Header variant="format" />
       <div className="max-w-[760px] mx-auto px-6 md:px-12 pt-16 pb-24">
-        <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
-          LEGAL
-        </div>
         <h1 className="font-[family-name:var(--font-bitter)] font-normal text-[40px] m-0 mb-2">
           Terms and Conditions
         </h1>

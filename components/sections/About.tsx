@@ -23,9 +23,6 @@ export default function About() {
           />
         </TiltCard>
         <div>
-          <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
-            WHO&apos;S BEHIND THIS
-          </div>
           <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[36px] m-0 mb-[18px]">
             Hi, I&apos;m Jack Racovalis.
           </h2>

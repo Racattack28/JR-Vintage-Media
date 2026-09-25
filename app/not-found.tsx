@@ -8,9 +8,6 @@ export default function NotFound() {
       <Header variant="format" />
       <div className="flex-1 flex items-center justify-center text-center px-6 py-24">
         <div>
-          <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
-            404
-          </div>
           <h1 className="font-[family-name:var(--font-bitter)] font-normal text-[36px] m-0 mb-4">
             This tape isn&apos;t in the collection.
           </h1>

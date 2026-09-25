@@ -16,9 +16,6 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[rgba(80,30,15,0.18)] mix-blend-multiply" />
 
       <div className="jr-hero-stagger relative max-w-[1240px] mx-auto px-6 md:px-12 pt-28 pb-32 md:pt-36 md:pb-40 flex flex-col items-center text-center">
-        <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#e8a874] mb-3">
-          TAPES IN. MEMORIES BACK.
-        </div>
         <h1 className="font-[family-name:var(--font-merriweather)] italic font-black text-[clamp(34px,5.5vw,66px)] leading-[1.18] m-0 mb-5 max-w-[950px] text-[#f5efe2]">
           Some memories aren&apos;t lost,{" "}
           <em className="text-[#e8845a]">

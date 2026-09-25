@@ -54,9 +54,19 @@ export default async function PartnerVerticalPage({
       <div className="bg-[#2b2016] text-[#f5efe2]">
         <div className="max-w-[1240px] mx-auto px-6 md:px-12 py-[84px] grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
           <div>
-            <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#d9a15a] mb-[14px]">
-              FOR {vertical.title.toUpperCase()}
-            </div>
+            <nav
+              aria-label="Breadcrumb"
+              className="text-[14px] text-[rgba(245,239,226,0.6)] mb-5"
+            >
+              <Link
+                href="/partner"
+                className="text-[rgba(245,239,226,0.6)] no-underline hover:text-[#f5efe2]"
+              >
+                Partner with me
+              </Link>
+              <span className="mx-2">/</span>
+              <span className="text-[#d9a15a]">{vertical.title}</span>
+            </nav>
             <h1 className="font-[family-name:var(--font-bitter)] font-normal text-[40px] leading-[1.25] m-0 mb-6">
               {vertical.heroHeadline}
             </h1>
@@ -101,9 +111,6 @@ export default async function PartnerVerticalPage({
       </div>
 
       <div className="max-w-[1240px] mx-auto px-6 md:px-12 py-[84px]">
-        <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
-          OTHER PARTNERSHIPS
-        </div>
         <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[30px] m-0 mb-8 max-w-[700px]">
           Wherever old tapes turn up in your line of work, there&apos;s a way
           to help.

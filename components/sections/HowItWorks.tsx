@@ -138,9 +138,6 @@ export default function HowItWorks() {
       id="how"
       className="block max-w-[1240px] mx-auto px-6 md:px-12 py-[84px] scroll-mt-[60px]"
     >
-      <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
-        HOW IT WORKS
-      </div>
       <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-11 max-w-[600px]">
         Three easy steps to bring your old memories back to life.
       </h2>

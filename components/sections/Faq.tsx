@@ -35,9 +35,6 @@ export default function Faq() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
-        FAQ
-      </div>
       <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-9 max-w-[600px]">
         Questions people ask before sending their tapes.
       </h2>

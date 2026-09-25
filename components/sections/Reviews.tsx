@@ -126,9 +126,6 @@ export default function Reviews() {
       id="reviews"
       className="block max-w-[1240px] mx-auto px-6 md:px-12 pt-[84px] pb-8"
     >
-      <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
-        REVIEWS
-      </div>
       <h2 className="font-[family-name:var(--font-bitter)] font-normal text-[42px] m-0 mb-10 max-w-[600px]">
         What families are saying.
       </h2>

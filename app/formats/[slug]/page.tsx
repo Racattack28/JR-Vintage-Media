@@ -51,9 +51,6 @@ export default async function FormatPage({
             className="object-cover"
           />
         </div>
-        <div className="font-[family-name:var(--font-barlow)] text-[12px] tracking-[2.5px] text-[#9c3d1f] mb-[14px]">
-          TAPE FORMAT
-        </div>
         <h1 className="font-[family-name:var(--font-bitter)] font-normal text-[40px] m-0 mb-5">
           {entry.title}
         </h1>
