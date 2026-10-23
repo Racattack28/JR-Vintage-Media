@@ -1,4 +1,6 @@
-import type { NextConfig } from "next";
+// Plain JS (not next.config.ts) on purpose: Hostinger's build server has an
+// older glibc than Next's native SWC binary needs, so Next falls back to its
+// WASM build there, and that fallback can't load a TypeScript config file.
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -8,7 +10,8 @@ const securityHeaders = [
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
 ];
 
-const nextConfig: NextConfig = {
+/** @type {import("next").NextConfig} */
+const nextConfig = {
   async headers() {
     return [
       {
